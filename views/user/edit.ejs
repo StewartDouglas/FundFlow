@@ -4,6 +4,7 @@
 		<input value="<%= user.name %>" name="name" type="text" class="form-control"/>
 		<input value="<%= user.title %>" name="title" type="text" class="form-control"/>
 		<input value="<%= user.email %>" name="email" type="text" class="form-control"/>
+		<input value="<%= user.sortcode %>" name="sortcode" type="text" class="form-control"/>
 		<% if (session.authenticated && session.User.admin) { %>
 			<% if (user.admin) { %>
 				<input type="hidden" name="admin" value="unchecked">

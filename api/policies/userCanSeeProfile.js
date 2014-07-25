@@ -11,6 +11,7 @@ module.exports = function(req, res, ok) {
 	// The requested id does not match the user's id,
 	// and this is not an admin
 	if (!(sessionUserMatchesId || isAdmin)) {
+		console.log('Got here');
 		var noRightsError = [{name: 'noRights', message: 'You must be an admin.'}]
 		req.session.flash = {
 			err: noRightsError

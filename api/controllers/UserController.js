@@ -18,6 +18,7 @@ module.exports = {
       name: req.param('name'),
       title: req.param('title'),
       email: req.param('email'),
+      sortcode: req.param('sortcode'),
       password: req.param('password'),
       confirmation: req.param('confirmation')
     }
@@ -108,13 +109,15 @@ module.exports = {
         name: req.param('name'),
         title: req.param('title'),
         email: req.param('email'),
+        sortcode: req.param('sortcode'),
         admin: req.param('admin')
       }
     } else {
       var userObj = {
         name: req.param('name'),
         title: req.param('title'),
-        email: req.param('email')
+        email: req.param('email'),
+        sortcode: req.param('sortcode')
       }
     }
 

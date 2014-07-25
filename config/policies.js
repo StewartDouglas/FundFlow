@@ -22,9 +22,12 @@ module.exports.policies = {
 		'new': "flash",
 		subscribe: ["flash", "authenticated"],
 		create: "flash",
-		show: "userCanSeeProfile",
-		edit: "userCanSeeProfile",
-		update: "userCanSeeProfile",
+		show: "flash",
+		//show: "userCanSeeProfile",
+		edit: "flash",
+		//edit: "userCanSeeProfile",
+		update: "flash",
+		//update: "userCanSeeProfile",
 		'*': "admin"
 	}
 

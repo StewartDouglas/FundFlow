@@ -16,13 +16,13 @@ module.exports.adapters = {
 
   // // If you leave the adapter config unspecified 
   // // in a model definition, 'default' will be used.
-   'default': 'mongo',
+   'default': 'mysql',
 
-   mongo: {
-      module   : 'sails-mongo',
-      url: process.env.DB_URL,
-      schema   : true
-    }
+   // mongo: {
+   //    module   : 'sails-mongo',
+   //    url: process.env.DB_URL,
+   //    schema   : true
+   //  }
 
   // // Persistent adapter for DEVELOPMENT ONLY
   // // (data IS preserved when the server shuts down)
@@ -32,14 +32,15 @@ module.exports.adapters = {
 
   // // MySQL is the world's most popular relational database.
   // // Learn more: http://en.wikipedia.org/wiki/MySQL
-  // mysql: {
+  mysql: {
 
-  //   module: 'sails-mysql',
-  //   host: 'YOUR_MYSQL_SERVER_HOSTNAME_OR_IP_ADDRESS',
-  //   user: 'YOUR_MYSQL_USER',
-  //   // Psst.. You can put your password in config/local.js instead
-  //   // so you don't inadvertently push it up if you're using version control
-  //   password: 'YOUR_MYSQL_PASSWORD', 
-  //   database: 'YOUR_MYSQL_DB'
-  // }
+    module: 'sails-mysql',
+    host: 'localhost',
+    port: 3000,  
+    user: 'root',
+    // Psst.. You can put your password in config/local.js instead
+    // so you don't inadvertently push it up if you're using version control
+    password: 'root', 
+    database: 'bitcoin'
+  }
 };

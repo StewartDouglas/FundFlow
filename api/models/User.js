@@ -28,6 +28,11 @@ module.exports = {
   		unique: true
   	},
 
+    sortcode: {
+      type: 'string',
+      required: true
+    },
+
   	encryptedPassword: {
   		type: 'string'
   	},
