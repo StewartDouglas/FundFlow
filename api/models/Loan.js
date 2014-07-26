@@ -18,7 +18,8 @@ module.exports = {
   	},
 
   	amount: {
-  		type: 'FLOAT'
+  		type: 'FLOAT',
+  		required: true
   	},
 
     interest: {

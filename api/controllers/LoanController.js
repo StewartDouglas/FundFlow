@@ -16,14 +16,62 @@
  */
 
 module.exports = {
-    
+
+  // This loads the sign-up page --> new.ejs
+  'new': function(req, res) {
+    res.view();
+  },
+
+  create: function(req,res, next){
+
+  	console.log('Creating loan now');
+
+    var loanObj = {
+      description: req.param('description'),
+      amount: req.param('amount'),
+      interest: req.param('interest'),
+
+      // ** Current defaults **
+      num_coupons: 12,
+      beginning: new Date(),
+      completion:new Date(),
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      // **********************
+
+      outstanding: 1
+    }
+
+  	Loan.create(loanObj, function loanCreated(err,loan){
+  		      // // If there's an error
+      // if (err) return next(err);
+
+      if (err) {
+        console.log(err);
+        req.session.flash = {
+          err: err
+        }
+
+        // If error redirect back to sign-up page
+        return res.redirect('/loan/new');
+
+		}
+
+		res.redirect('/loan/created');
+
+  	})
+
+
+  },
+
+  created: function(req,res){
+  	res.view();
+  },
+
   show: function(req,res){
 
     var qry = 'SELECT * FROM loan WHERE outstanding=true';
     Loan.query(qry, function foundLoan(err,loan){
-      console.log('Loan details: ');
-      console.log(loan);
-      console.log(loan.length)
       res.view({
         loan: loan
       });

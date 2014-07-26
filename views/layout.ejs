@@ -65,9 +65,9 @@
             <% } %>
             <% if (session.authenticated && session.User.admin) { %>
             <li><a href="/user">User Administration</a></li>
-            <li><a href="#">Get Funding</a></li>
-            <li><a href="/loan/show">Give Funding</a></li>
             <% } %>
+            <li><a href="/loan/create">Get Funding</a></li>
+            <li><a href="/loan/show">Give Funding</a></li>
           </ul>
           <div class="navbar-right">
             <% if (session.authenticated) { %>
@@ -93,7 +93,7 @@
     <%- body %>
 
     <div class="container">
-      <hr>
+      <!-- <hr> -->
       <footer class="footer pull-right">
         <div>
           <div>App create using <a href="http://sailsjs.com/">sails.js</a></div>

@@ -1,40 +1,26 @@
-<form action="/user/create" method="POST" id="sign-up-form" class="form-signin">
-	<h2 class="form-signin-heading">Create an account</h2>
+<form action="/loan/create" method="POST" id="sign-up-form" class="form-signin">
+	<h2 class="form-signin-heading">Apply for a loan</h2>
 
-	<% if(flash && flash.err) { %>
-		<ul class="alert alert-success">
-	<% Object.keys(flash.err).forEach(function(error) { %>
-		<li><%- JSON.stringify(flash.err[error]) %></li>
-	<% }) %>
-	</ul>
-	<% } %>
 
-	
+	<!-- Need error handling logic -->
+
+
+
+
+
+
 	<div class="control-group">
-	<input type="text" class="form-control" placeholder="your name" name="name">
+	<input type="number" class="form-control" placeholder="amount" name="amount">
 	</div>
 
 	<div class="control-group">
-	<input type="text" class="form-control" placeholder="your title" name="title">
-	</div>
-	
-	<div class="control-group">
-	<input type="text" class="form-control" placeholder="email address" name="email">
-	</div>
-
-	<div class="control-group">
-	<input type="text" class="form-control" placeholder="bank sortcode" name="sortcode">
+	<input type="number" class="form-control" placeholder="interest" name="interest">
 	</div>
 	
 	<div class="control-group">
-	<input type="password" class="form-control" placeholder="password" name="password" id="password">
+	<input type="text" class="form-control" placeholder="description" name="description">
 	</div>
 
-	<div class="control-group">
-	<input type="password" class="form-control" placeholder="password confirmation" name="confirmation">
-	<br />
-	</div>
-
-	<input type="submit" class="btn btn-lg btn-primary btn-block" value="Create Account"/>
+	<input type="submit" class="btn btn-lg btn-primary btn-block" value="Apply"/>
 	<input type="hidden" name="_csrf" value="<%= _csrf %>" />
 </form>
