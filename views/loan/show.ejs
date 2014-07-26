@@ -1,0 +1,21 @@
+<div class='container'>
+	<h1> Funding Opportunities </h1>
+		<table class="table table-striped">
+		<tr>
+			<th>Description</th>
+			<th>Amount</th>
+			<th>Interest</th>
+			<th>Beginning</th>
+		</tr>
+		<% for(var i=0; i<loan.length; i++) {%>
+		<tr>
+		   <td><%= loan[i].description %></td>
+		   <td><%= loan[i].amount %></td>
+		   <td><%= loan[i].interest %></td>
+		   <td><%= loan[i].beginning %></td>
+		</tr>
+		<% } %>
+	</table>
+
+	
+</div>

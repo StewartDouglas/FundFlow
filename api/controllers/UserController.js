@@ -175,6 +175,6 @@ module.exports = {
       // html over the socket.
       res.send(200);
     });
-  }
+  },
 
 };
