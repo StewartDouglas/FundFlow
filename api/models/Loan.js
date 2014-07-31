@@ -11,6 +11,11 @@ module.exports = {
   schema: true,
 
   attributes: {
+
+    borrower: {
+      type: 'INTEGER',
+      required: true
+    },
   	
   	description: {
   		type: 'string',
@@ -42,9 +47,21 @@ module.exports = {
       required: true
     },
 
-    outstanding: {
+    // The date by which the loan must be funded
+    expires: {
+      type: 'DATE',
+      required: true
+    },
+
+    fullyFunded: {
       type: 'BOOLEAN',
       required: true
+    },
+
+    // Default = 0
+    amountFunded: {
+      type: 'FLOAT',
+      required: true,
     },
 
     toJSON: function() {

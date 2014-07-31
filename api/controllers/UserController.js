@@ -69,8 +69,16 @@ module.exports = {
     User.findOne(req.param('id'), function foundUser(err, user) {
       if (err) return next(err);
       if (!user) return next();
-      res.view({
-        user: user
+      var qry = 'SELECT * FROM loan where borrower='+req.param('id');
+      Loan.query(qry, function foundLoans(err,loan){
+
+        // ** Need to handle case where user has no loans **
+
+        if(err) return next(err);
+        res.view({
+          user: user,
+          loan: loan
+        });
       });
     });
   },

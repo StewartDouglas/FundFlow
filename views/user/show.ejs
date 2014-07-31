@@ -1,15 +1,38 @@
 <div class='container'>
-	<h1><%= user.name %> </h1>
-	<% if (user.admin) { %>
-		<img src="/images/admin.png">admin
-	<% } else { %>
-			<img src="/images/pawn.png">pawn
-	<% } %>		
-	<h3><%= user.title %> </h3>
-	<hr>
-	<h3>contact: <%= user.email %> </h3>
-	
-	<a class="btn btn-medium btn-primary" href="/user/edit/<%= user.id %>">Edit</a>
-	
+	<div style="background-color: #eeeeee; border-radius: 20px; padding: 5px">
+		<h1><%= user.name %> 
+			<small><%= user.email %> </small>
+		</h1>
+		
+		<hr>
+
+		<h1> Outstanding Loans </h1>
+			<table class="table table-striped">
+			<tr>
+				<th>Description</th>
+				<th>Amount</th>
+				<th>Interest</th>
+				<th>Expires</th>
+				<th>Funded</th>
+				<th></th>
+			</tr>
+			<% for(var i=0; i<loan.length; i++) {%>
+			<tr>
+			   <td><%= loan[i].description %></td>
+			   <td><%= loan[i].amount %></td>
+			   <td><%= loan[i].interest %></td>
+			   <td><%= loan[i].expires %></td>
+			   <td><%= loan[i].amountFunded %></td>
+
+			   	<td><form action="/loan/destroy/<%= loan[i].id %>" method="POST">
+					<input type="hidden" name="_method" value="delete"/>
+					<input type="submit" class="btn btn-sm btn-danger" value="Cancel"/>
+					<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+				</form></td>
+			</tr>
+			<% } %>
+		</table>
+		
+	</div>
 </div>
 

@@ -1,0 +1,27 @@
+<div class='container'>
+	<div style="background-color: #eeeeee; border-radius: 20px; padding: 5px">
+		<h1> Funding Opportunities </h1>
+			<table class="table table-striped">
+			<tr>
+				<th>Description</th>
+				<th>Amount</th>
+				<th>Interest</th>
+				<th>Beginning</th>
+				<th></th>
+			</tr>
+			<tr>
+			   <td><%= loan.description %></td>
+			   <td><%= loan.amount %></td>
+			   <td><%= loan.interest %></td>
+			   <td><%= loan.beginning %></td>
+				<td><form action="/loan/giveFunds/<%= loan.id %>" method="POST">
+					<input type="number" class="form-control"  placeholder="0.0" name="fund"/>
+					<input type="submit" value="Fund" class="btn btn-lg btn-primary btn-block"/>
+					<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+				</form></td>
+
+			</tr>
+		</table>
+
+	</div>
+</div>

@@ -1,21 +1,28 @@
 <div class='container'>
-	<h1> Funding Opportunities </h1>
-		<table class="table table-striped">
-		<tr>
-			<th>Description</th>
-			<th>Amount</th>
-			<th>Interest</th>
-			<th>Beginning</th>
-		</tr>
-		<% for(var i=0; i<loan.length; i++) {%>
-		<tr>
-		   <td><%= loan[i].description %></td>
-		   <td><%= loan[i].amount %></td>
-		   <td><%= loan[i].interest %></td>
-		   <td><%= loan[i].beginning %></td>
-		</tr>
-		<% } %>
-	</table>
+	<div style="background-color: #eeeeee; border-radius: 20px; padding: 5px">
+		<h1> Funding Opportunities </h1>
+			<table class="table table-striped">
+			<tr>
+				<th>Borrower</th>
+				<th>Description</th>
+				<th>Amount</th>
+				<th>Interest</th>
+				<th>Expires</th>
+				<th>Amount Funded</th>
+				<th></th>
+			</tr>
+			<% for(var i=0; i<loan.length; i++) {%>
+			<tr>
+			   <td><a href="/user/show/<%= loan[i].user_id %>"><%= loan[i].borrower %></a></td>
+			   <td><%= loan[i].description %></td>
+			   <td><%= loan[i].amount %></td>
+			   <td><%= loan[i].interest %></td>
+			   <td><%= loan[i].expires %></td>
+			   <td><%= loan[i].amountFunded %></td>
+			   <td><a href="/loan/fund/<%= loan[i].id %>" class="btn btn-sm btn-primary">Fund</a></td>
+			</tr>
+			<% } %>
+		</table>
 
-	
+	</div>
 </div>

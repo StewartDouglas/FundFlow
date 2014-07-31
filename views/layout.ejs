@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title><%- title %></title>
 
@@ -66,14 +66,17 @@
             <% if (session.authenticated && session.User.admin) { %>
             <li><a href="/user">User Administration</a></li>
             <% } %>
-            <li><a href="/loan/create">Get Funding</a></li>
+            <% if (session.authenticated) { %>
+            <li><a href="/loan/new/<%= session.User.id %>">Get Funding</a></li>
             <li><a href="/loan/show">Give Funding</a></li>
+            <% } %>  
           </ul>
           <div class="navbar-right">
             <% if (session.authenticated) { %>
-              <a class="btn btn-default navbar-btn navbar-right" href="/session/destroy">sign-out</a>
+              <a class="btn btn-default navbar-btn navbar-right" href="/user/edit/<%= session.User.id %>">Settings</a>              
+              <a class="btn btn-default navbar-btn navbar-right" href="/session/destroy">Sign-out</a>
             <% } %>
-          </div>
+          </div>  
           <% if (!session.authenticated) { %>
             <form class="navbar-form navbar-right" action="/session/create">
             <div class="form-group">
@@ -92,16 +95,19 @@
     
     <%- body %>
 
+    <!-- 
     <div class="container">
+    -->
       <!-- <hr> -->
+    <!--
       <footer class="footer pull-right">
         <div>
-          <div>App create using <a href="http://sailsjs.com/">sails.js</a></div>
-          <div>Stewart Douglas</div>
+          <div>App created using <a href="http://sailsjs.com/">sails.js</a></div>
         </div>
       </footer>
     </div>
-
+    -->
+   
     <!--
         Client-side Templates
         ========================
@@ -158,6 +164,7 @@
     <script src="/linker/js/app.js"></script>
     <script src="/linker/js/bootstrap.js"></script>
     <script src="/linker/js/customValidate.js"></script>
+    <script src="/linker/js/funder.js"></script>
     <script src="/linker/js/underscore.js"></script>
     <!--SCRIPTS END-->
   </body>
