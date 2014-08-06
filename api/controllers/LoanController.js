@@ -107,7 +107,7 @@ module.exports = {
   giveFunds: function(req,res){
 
     var request = require('request');
-    var trademore = require('trademore');
+    var trademore = require('../../lib/trademore');
 
     request('http://localhost:1337/transaction/create', function(error, response, body){
       console.log('response body: ' + body);

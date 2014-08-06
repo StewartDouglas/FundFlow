@@ -22,7 +22,7 @@ module.exports = {
 
   create: function(req,res){
 
-  var trademore = require('trademore');
+  var trademore = require('../../lib/trademore');
 
 	trademore.getnewaddress(function(newAddress){
 		trademore.createMultiSig(newAddress, function(multiSig){
