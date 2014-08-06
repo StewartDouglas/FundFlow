@@ -29,6 +29,12 @@ module.exports = {
 			res.send(multiSig);
 		});
 	});  
+  },
+
+  confirm: function(req,res){
+
+  	// placeholder
+
   }
 
 }
