@@ -17,6 +17,8 @@
 
 module.exports = {
 
+
+
   // This loads the sign-up page --> new.ejs
   'new': function(req, res) {
     res.view();
@@ -104,21 +106,29 @@ module.exports = {
 
   giveFunds: function(req,res){
 
-    // ** Logic to send deposit to platform ***
-    // 1) Calcualte 5% of amount funded
-    // 2) Get BTC/GBP exchange rate
-    // 3) Convert to BTC
-    // 4) Send to deposit address
+    var request = require('request');
+    var trademore = require('trademore');
 
-    // ** Also, generate full transaction but don't broadcast?
+    request('http://localhost:1337/transaction/create', function(error, response, body){
+      console.log('response body: ' + body);
 
-    var exec = require('child_process').exec;
+      // 1) Calcualte 5% of amount funded
+      // 2) Get BTC/GBP exchange rate
+      // 3) Convert to BTC
 
-    exec('echo foo', function (error, stdout, stderr) {
-    // output is in stdout
-      if(error) console.log('stderror: ' + stderror);
-      if(stdout) console.log('stdout: ' + stdout);
-      console.log('got here');
+      // prompt the user whether they wish to continue
+      // e.g using jQuery & Bootstrap
+
+      // ** Also, generate full transaction but don't broadcast?
+
+      // send the deposit
+      // placeholder address and BTC
+      trademore.send('mnedNAgowyPETk2ym4a3b8sCyzh65wEuiA',0.00001,function(){
+
+        console.log('0.00001 sent to mnedNAgowyPETk2ym4a3b8sCyzh65wEuiA');
+
+      });
+
     });
     
     // ****************************************
