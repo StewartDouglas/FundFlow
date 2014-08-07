@@ -37,15 +37,19 @@ module.exports = {
     console.log('Step 6. Server. Server receives transaction: ' + req.body.txid);
 
     //check validity of transaction
-    trademore.confirm(req.body.txid, function(validity){
+    trademore.confirm(req.body.txid, function(transaction, validity){
+
+      console.log('Step 7. Server. Server parses the transaction: ');
+      console.log(transaction);
+
       if(validity==true)
       {
-        res.send(200,{info:'here'})
+        res.send(200, {status: 'ok'});
       }
-      else{
-
+      else
+      {
         // handle invalid transaction
-
+        res.send({status: 'invalid'});
       }
 
     });
