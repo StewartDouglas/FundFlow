@@ -22,24 +22,23 @@ module.exports = {
 
   create: function(req,res){
 
-  var trademore = require('../../lib/trademore');
+    var trademore = require('../../lib/trademore');
 
-	trademore.getnewaddress(function(newAddress){
-		trademore.createMultiSig(newAddress, function(multiSig){
-			res.send(multiSig);
-		});
-	});  
-  },
+  		trademore.createMultiSig(req.body.client_address, function(multiSig){
+  			res.send(multiSig);
+  		});
+
+  }, // create
 
   confirm: function(req,res){
 
-  	console.log('In TransactionController::confirm, req.body: ');
-    console.log(req.body)
-    console.log('In TransactionController::confirm, txid: ' + txid);
+    var trademore = require('../../lib/trademore');
+
+    console.log('Step 6. Server. Server receives transaction: ' + req.body.txid);
 
     //check validity of transaction
     trademore.confirm(req.body.txid, function(validity){
-      if(validitiy==true)
+      if(validity==true)
       {
         res.send(200,{info:'here'})
       }
@@ -51,6 +50,6 @@ module.exports = {
 
     });
 
-  }
+  } // confirm
 
 }

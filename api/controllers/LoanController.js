@@ -110,41 +110,45 @@ module.exports = {
     var request = require('request');
     var trademore = require('../../lib/trademore');
 
-    var form = new FormData();
+    var form1 = new FormData();
+    var form2 = new FormData();
 
-    request('http://localhost:1337/transaction/create', function(error, response, body){
-      console.log('response body: ' + body);
+    trademore.getnewwaddress(function(client_address){
 
-      // 1) Calcualte 5% of amount funded
-      // 2) Get BTC/GBP exchange rate
-      // 3) Convert to BTC
+      console.log("Step 1. Client. Creates Address: " + client_address);
 
-      // prompt the user whether they wish to continue
-      // e.g using jQuery & Bootstrap
+      form1.append('client_address', client_address);
+      form1.submit('http://localhost:1337/transaction/create', function(err,res1){
+        
+          console.log('Step 4. Client. Receive MultiSig address: ' + res1);
 
-      // ** Also, generate full transaction but don't broadcast?
+          // 1) Calcualte 5% of amount funded
+          // 2) Get BTC/GBP exchange rate
+          // 3) Convert to BTC
+          // prompt the user whether they wish to continue
+          // e.g using jQuery & Bootstrap
+          // ** Also, generate full transaction but don't broadcast?
 
-      // send the deposit
-      // placeholder address and BTC
-      trademore.send('mnedNAgowyPETk2ym4a3b8sCyzh65wEuiA',0.00001,function(txid){
+          // send the deposit
+          // placeholder address and BTC
+          trademore.send('mnedNAgowyPETk2ym4a3b8sCyzh65wEuiA',0.00001,function(txid){
 
-        console.log('0.00001 sent to mnedNAgowyPETk2ym4a3b8sCyzh65wEuiA');
-        console.log('txid: ' + txid);
+            console.log('Step 5. Client. Generate transaction with txid: ' + txid)
 
-        //request.get('http://localhost:1337/csrfToken', function(error, getResponse, getBody){
-          // CRSF currently turned off. See config/csrf.js
-          //console.log('JSON.parse(getBody) :' + JSON.parse(getBody)._csrf);
+            //request.get('http://localhost:1337/csrfToken', function(error, getResponse, getBody){
+              // CRSF currently turned off. See config/csrf.js
+              //console.log('JSON.parse(getBody) :' + JSON.parse(getBody)._csrf);
 
-          form.append('txid', txid);
-          
-          form.submit('http://localhost:1337/transaction/confirm', function(err,res){
+              form2.append('txid', txid);
+              form2.submit('http://localhost:1337/transaction/confirm', function(err,res){
 
-             console.log('In LoanController::giveFunds res: ' + res); 
+                 console.log('Step 7. Client. Receive confirmation message: ' + res); 
 
-          }); // form.submit
-        //}); // request.get -- CSRF
-      }); // trademore.send
-    }); // request
+              }); // form2.submit
+            //}); // request.get -- CSRF
+          }); // trademore.send     
+      }); // form1.submit 
+    }); // trademore.getnewaddress
     
     // ****************************************
 
