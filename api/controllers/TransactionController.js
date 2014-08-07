@@ -33,7 +33,13 @@ module.exports = {
 
   confirm: function(req,res){
 
-  	console.log('In TransactionController::confirm, req: ' + req);
+  	console.log('In TransactionController::confirm, req: ');
+
+    for(var i in req){
+      req[i].forEach(function(elem, index) {
+        console.log(elem, index);
+    });
+    }
 
     res.send(200, {foo: 'foo'}); 
 
