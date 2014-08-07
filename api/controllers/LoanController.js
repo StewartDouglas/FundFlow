@@ -142,7 +142,7 @@ module.exports = {
               form2.append('txid', txid);
               form2.submit('http://localhost:1337/transaction/confirm', function(err,res){
 
-                 console.log('Step 7. Client. Receive confirmation message: ' + res); 
+                 console.log('Step 8. Client. Receive confirmation message: ' + res); 
 
               }); // form2.submit
             //}); // request.get -- CSRF

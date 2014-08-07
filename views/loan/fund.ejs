@@ -14,14 +14,46 @@
 			   <td><%= loan.amount %></td>
 			   <td><%= loan.interest %></td>
 			   <td><%= loan.beginning %></td>
-				<td><form action="/loan/giveFunds/<%= loan.id %>" method="POST">
-					<input type="number" class="form-control"  placeholder="0.0" name="fund"/>
-					<input type="submit" value="Fund" class="btn btn-lg btn-primary btn-block"/>
-					<input type="hidden" name="_csrf" value="<%= _csrf %>" />
-				</form></td>
+			   <td>
+
+			      <form action="/loan/giveFunds/<%= loan.id %>" method="POST" id="giveFunds">
+								<input type="number" class="form-control"  placeholder="0.0" name="fund"/>
+								<input type="submit" value="Fund" class="btn btn-lg btn-primary btn-block"/>
+								<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+				  </form>			   
+			   	   <!--
+				   <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+	  				Launch demo modal
+				   </button>
+				   -->
+			   </td>
 
 			</tr>
 		</table>
-
 	</div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Are you sure?</h4>
+      </div>
+      <div class="modal-body">
+
+      Are you sure you want to provide these funds?
+      If you click your account will be debited XX BTC
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="cancel">Cancel</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" id="confirm">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
