@@ -123,10 +123,17 @@ module.exports = {
 
       // send the deposit
       // placeholder address and BTC
-      trademore.send('mnedNAgowyPETk2ym4a3b8sCyzh65wEuiA',0.000001,function(txid){
+      trademore.send('mnedNAgowyPETk2ym4a3b8sCyzh65wEuiA',0.00001,function(txid){
 
-        console.log('0.000001 sent to mnedNAgowyPETk2ym4a3b8sCyzh65wEuiA');
+        console.log('0.00001 sent to mnedNAgowyPETk2ym4a3b8sCyzh65wEuiA');
         console.log('txid: ' + txid);
+
+        request('http://localhost:1337/transaction/confirm', function(error, response, body){
+
+          console.log('In LoanController::giveFunds response: ' + response);                          
+          console.log('In LoanController::giveFunds body: ' + body); 
+
+        });
 
       });
 
