@@ -4,7 +4,7 @@ $(function(){  // $(document).ready shorthand
   });
 
   $('#giveFunds').submit(function(event) {
-  	var form = this; // cache a reference to the form
+  	var form = this;        // cache a reference to the form
   	event.preventDefault(); // prevent the form from submitting
 
   	$('#myModal').modal('show');

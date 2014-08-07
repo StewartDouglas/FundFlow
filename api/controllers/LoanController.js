@@ -118,6 +118,8 @@ module.exports = {
       console.log("Step 1. Client. Creates Address: " + client_address);
 
       form1.append('client_address', client_address);
+      form1.append('loan_id', req.param('id'));
+      form1.append('loan_id', req.param('fund'));
       form1.submit('http://localhost:1337/transaction/create', function(err,res1){
         
           console.log('Step 4. Client. Receive MultiSig address: ' + res1);
@@ -144,6 +146,12 @@ module.exports = {
 
                  console.log('Step 8. Client. Receive confirmation message: ' + res); 
 
+                 // var transQuery = 'INSERT INTO '
+
+
+
+
+
               }); // form2.submit
             //}); // request.get -- CSRF
           }); // trademore.send     
@@ -158,7 +166,9 @@ module.exports = {
 
     Loan.query(qry, function updatedLoan(err, loan){
 
-      // ** Handle possible errors ** 
+      // ** Handle possible errors **
+
+      // ** Handle case where we have reached our target ** 
 
       res.redirect('/loan/show');
 

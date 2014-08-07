@@ -9,10 +9,15 @@
 module.exports = {
 
   attributes: {
-  	
-    borrower: {
-      type: 'INTEGER',
-      required: true
+
+    amount: {
+    	type: 'FLOAT',
+    	require: true
+    },
+
+    loan: {
+    	type: 'INTEGER',
+    	require: true
     }
     
   }
