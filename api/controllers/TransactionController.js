@@ -35,13 +35,21 @@ module.exports = {
 
   	console.log('In TransactionController::confirm, req.body: ');
     console.log(req.body)
+    console.log('In TransactionController::confirm, txid: ' + txid);
 
     //check validity of transaction
+    trademore.confirm(req.body.txid, function(validity){
+      if(validitiy==true)
+      {
+        res.send(200,{info:'here'})
+      }
+      else{
 
-    // If valid, send response 200
-    res.send(200, {foo: 'foo'}); 
+        // handle invalid transaction
 
-    //trademore.confirm()
+      }
+
+    });
 
   }
 
