@@ -130,6 +130,7 @@ module.exports = {
 
         request('http://localhost:1337/transaction/confirm', function(error, response, body){
 
+          if(error) console.log('Error: ' + error);
           console.log('In LoanController::giveFunds response: ' + response);                          
           console.log('In LoanController::giveFunds body: ' + body); 
 

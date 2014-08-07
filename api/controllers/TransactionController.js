@@ -33,7 +33,9 @@ module.exports = {
 
   confirm: function(req,res){
 
-  	console.log('In TransactionController::confirm, req: ' + req); 
+  	console.log('In TransactionController::confirm, req: ' + req.params);
+
+    res.send(200, {foo: 'foo'}); 
 
     //trademore.confirm()
 
