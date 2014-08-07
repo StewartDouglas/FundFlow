@@ -113,7 +113,7 @@ module.exports = {
     var form1 = new FormData();
     var form2 = new FormData();
 
-    trademore.getnewwaddress(function(client_address){
+    trademore.getnewaddress(function(client_address){
 
       console.log("Step 1. Client. Creates Address: " + client_address);
 
