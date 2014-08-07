@@ -128,15 +128,20 @@ module.exports = {
         console.log('0.00001 sent to mnedNAgowyPETk2ym4a3b8sCyzh65wEuiA');
         console.log('txid: ' + txid);
 
-        request.post('http://localhost:1337/transaction/confirm', {form : { test: 'json' } } ,function(error, response, body){
+        request.get('http://localhost:1337/csrfToken', function(error, getResponse, getBody){
 
-          if(error) console.log('Error: ' + error);
-          console.log('In LoanController::giveFunds response: ' + response);                          
-          console.log('In LoanController::giveFunds body: ' + body); 
+          console.log('getResponse :' + getResponse);
+          console.log('getBody :' + getBody);
 
-        });
+          request.post('http://localhost:1337/transaction/confirm', {form : { test: 'json', _csrf: getResponse._csrf } } ,function(error, response, body){
 
-      });
+            if(error) console.log('Error: ' + error);
+            console.log('In LoanController::giveFunds response: ' + response);                          
+            console.log('In LoanController::giveFunds body: ' + body); 
+
+          }); // request.post
+        }); // request.get
+      }); // trademore.send
 
     });
     
