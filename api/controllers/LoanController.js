@@ -128,7 +128,7 @@ module.exports = {
         console.log('0.00001 sent to mnedNAgowyPETk2ym4a3b8sCyzh65wEuiA');
         console.log('txid: ' + txid);
 
-        request('http://localhost:1337/transaction/confirm', function(error, response, body){
+        request('http://localhost:1337/transaction/confirm', { test: 'json' } ,function(error, response, body){
 
           if(error) console.log('Error: ' + error);
           console.log('In LoanController::giveFunds response: ' + response);                          
