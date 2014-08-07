@@ -11,7 +11,8 @@
     "optimist": "0.3.4",
     "bcrypt": "~0.7.6",
     "sails-mysql": "0.9.x",
-    "bitcoin": "*"
+    "bitcoin": "*",
+    "form-data": "*"
 
   },
   "scripts": {

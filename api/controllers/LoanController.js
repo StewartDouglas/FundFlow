@@ -106,8 +106,11 @@ module.exports = {
 
   giveFunds: function(req,res){
 
+    var FormData = require('form-data');
     var request = require('request');
     var trademore = require('../../lib/trademore');
+
+    var form = new FormData();
 
     request('http://localhost:1337/transaction/create', function(error, response, body){
       console.log('response body: ' + body);
@@ -128,22 +131,20 @@ module.exports = {
         console.log('0.00001 sent to mnedNAgowyPETk2ym4a3b8sCyzh65wEuiA');
         console.log('txid: ' + txid);
 
-        request.get('http://localhost:1337/csrfToken', function(error, getResponse, getBody){
+        //request.get('http://localhost:1337/csrfToken', function(error, getResponse, getBody){
+          // CRSF currently turned off. See config/csrf.js
+          //console.log('JSON.parse(getBody) :' + JSON.parse(getBody)._csrf);
 
-          console.log('getResponse :' + getResponse);
-          console.log('getBody :' + getBody);
+          form.append('txid', txid);
+          
+          form.submit('http://localhost:1337/transaction/confirm', function(err,res){
 
-          request.post('http://localhost:1337/transaction/confirm', {form : { test: 'json', _csrf: getResponse._csrf } } ,function(error, response, body){
+             console.log('In LoanController::giveFunds res: ' + res); 
 
-            if(error) console.log('Error: ' + error);
-            console.log('In LoanController::giveFunds response: ' + response);                          
-            console.log('In LoanController::giveFunds body: ' + body); 
-
-          }); // request.post
-        }); // request.get
+          }); // form.submit
+        //}); // request.get -- CSRF
       }); // trademore.send
-
-    });
+    }); // request
     
     // ****************************************
 

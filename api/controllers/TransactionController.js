@@ -33,12 +33,12 @@ module.exports = {
 
   confirm: function(req,res){
 
-  	console.log('In TransactionController::confirm, req: ');
+  	console.log('In TransactionController::confirm, req.body: ');
+    console.log(req.body)
 
-    for(var i in req){
-       console.log('req[' + i + ']: ' + req[i]);
-    }
+    //check validity of transaction
 
+    // If valid, send response 200
     res.send(200, {foo: 'foo'}); 
 
     //trademore.confirm()
