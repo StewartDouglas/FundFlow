@@ -22,15 +22,16 @@ module.exports = {
 
   create: function(req,res){
 
-    var transObj = {
-      loan: req.param.loan_id;
-      //amount: 
-    }
-
-    //Transaction.create
-
-
     var trademore = require('../../lib/trademore');
+
+    var transObj = {
+      loan: req.param('loan_id'),
+      amount: req.param('fund')
+    };
+
+    // Transaction.create(transObj, function transCreated(err, trans){
+    //   console.log('Transaction created');
+    // });
 
   		trademore.createMultiSig(req.body.client_address, function(multiSig){
   			res.send(multiSig);

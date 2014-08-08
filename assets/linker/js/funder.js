@@ -5,8 +5,11 @@ $(function(){  // $(document).ready shorthand
 
   $('#giveFunds').submit(function(event) {
   	var form = this;        // cache a reference to the form
+    var total_amount = this.fund.value;
+    var debit_amount = total_amount * 0.05;
   	event.preventDefault(); // prevent the form from submitting
 
+    $('#amount').html(debit_amount);
   	$('#myModal').modal('show');
   	
   	$('#confirm').click(function(){

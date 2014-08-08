@@ -110,17 +110,18 @@ module.exports = {
     var request = require('request');
     var trademore = require('../../lib/trademore');
 
-    var form1 = new FormData();
-    var form2 = new FormData();
+    var createForm = new FormData();
+    var confirmForm = new FormData();
 
     trademore.getnewaddress(function(client_address){
 
       console.log("Step 1. Client. Creates Address: " + client_address);
 
-      form1.append('client_address', client_address);
-      form1.append('loan_id', req.param('id'));
-      form1.append('loan_id', req.param('fund'));
-      form1.submit('http://localhost:1337/transaction/create', function(err,res1){
+      createForm.append('client_address', client_address);
+      createForm.append('loan_id', req.param('id'));
+      createForm.append('fund', req.param('fund'));
+      //console.log('req.param(fund)' + req.param('fund'));
+      createForm.submit('http://localhost:1337/transaction/create', function(err,res1){
         
           console.log('Step 4. Client. Receive MultiSig address: ' + res1);
 
@@ -141,8 +142,9 @@ module.exports = {
               // CRSF currently turned off. See config/csrf.js
               //console.log('JSON.parse(getBody) :' + JSON.parse(getBody)._csrf);
 
-              form2.append('txid', txid);
-              form2.submit('http://localhost:1337/transaction/confirm', function(err,res){
+              confirmForm.append('txid', txid);
+              confirmForm.append('fund', req.param('fund'));
+              confirmForm.submit('http://localhost:1337/transaction/confirm', function(err,res){
 
                  console.log('Step 8. Client. Receive confirmation message: ' + res); 
 
@@ -152,10 +154,10 @@ module.exports = {
 
 
 
-              }); // form2.submit
+              }); // confirmForm.submit
             //}); // request.get -- CSRF
           }); // trademore.send     
-      }); // form1.submit 
+      }); // createForm.submit 
     }); // trademore.getnewaddress
     
     // ****************************************
