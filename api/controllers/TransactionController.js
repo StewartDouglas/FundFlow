@@ -24,16 +24,31 @@ module.exports = {
 
     var trademore = require('../../lib/trademore');
 
+    //console.log('loan: '+ req.param('loan_id'))
+    //console.log('amount: '+ req.param('fund'))
+
+    /*  
     var transObj = {
       loan: req.param('loan_id'),
       amount: req.param('fund')
     };
 
-    // Transaction.create(transObj, function transCreated(err, trans){
-    //   console.log('Transaction created');
-    // });
+    // This throws an error
+    Transaction.create(transObj, function transCreated(err, trans){
+       console.log('Transaction created');
+    });
+    */
 
-  		trademore.createMultiSig(req.body.client_address, function(multiSig){
+    // The above errors. Do the .create manually
+    var qry = 'INSERT INTO transaction (createdAt,updatedAt,amount,loan) ' +
+              'VALUES (now(),now(),' + req.param('fund') + ',' + req.param('loan_id') +')';
+
+
+    Transaction.query(qry, function updateTransaction(err,trans){
+    })
+
+
+  	trademore.createMultiSig(req.body.client_address, function(multiSig){
   			res.send(multiSig);
   		});
 
