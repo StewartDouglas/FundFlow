@@ -78,6 +78,10 @@ module.exports = {
 
   show: function(req,res){
 
+    //console.log(session);
+    //console.log(user);
+    //console.log('req.session.User.id: ' + req.session.User.id);
+
     var qry = 'SELECT user.name AS borrower, '
                    + 'user.id AS user_id, '
                    + 'loan.description AS description, '
@@ -113,15 +117,17 @@ module.exports = {
     var createForm = new FormData();
     var confirmForm = new FormData();
 
-    trademore.getnewaddress(function(client_address){
+    trademore.getnewaddress(function(clientAddress){
 
-      console.log("Step 1. Client. Creates Address: " + client_address);
+      console.log("Step 1. Client. Creates Address: " + clientAddress);
 
-      createForm.append('client_address', client_address);
-      createForm.append('loan_id', req.param('id'));
+      createForm.append('clientAddress', clientAddress);
+      createForm.append('loanId', req.param('id'));
       createForm.append('fund', req.param('fund'));
-      //console.log('req.param(fund)' + req.param('fund'));
+      createForm.append('userId', req.session.User.id)
       createForm.submit('http://localhost:1337/transaction/create', function(err,res1){
+
+    /************************************
         
           console.log('Step 4. Client. Receive MultiSig address: ' + res1);
 
@@ -150,17 +156,16 @@ module.exports = {
 
                  // var transQuery = 'INSERT INTO '
 
-
-
-
-
               }); // confirmForm.submit
             //}); // request.get -- CSRF
-          }); // trademore.send     
+          }); // trademore.send 
+  
+    ************************************/
+
       }); // createForm.submit 
     }); // trademore.getnewaddress
     
-    // ****************************************
+
 
     var qry = 'UPDATE loan ' +
               'SET amountFunded=amountFunded+' + req.param('fund') + ' ' +
@@ -171,10 +176,28 @@ module.exports = {
       // ** Handle possible errors **
 
       // ** Handle case where we have reached our target ** 
+      Loan.findOne(req.param('id'), function foundLoan(err, updateLoan){
 
+        if(err) 
+        { 
+          console.log('Error: ' + err)
+        }
+        else // we found a loan
+        {
+          if(updateLoan.amountFunded >= updateLoan.amount){
+            console.log('Loan ' + updateLoan.id + ' has been fully funded.');
+            Loan.update({id: updateLoan.id},{fullyFunded : 1},function(err,fundedLoan){
+              if(err) { console.log('Error trying to update loan'); }
+              else { console.log('Loan status updated to fully funded'); }
+            }); // Loan.update
+          }; // if
+        }; // else
+      }); // Loan.findOne
+      
       res.redirect('/loan/show');
 
     })
+
   },
 
   destroy: function(req, res, next){

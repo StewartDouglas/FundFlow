@@ -39,16 +39,17 @@ module.exports = {
     });
     */
 
-    // The above errors. Do the .create manually
-    var qry = 'INSERT INTO transaction (createdAt,updatedAt,amount,loan) ' +
-              'VALUES (now(),now(),' + req.param('fund') + ',' + req.param('loan_id') +')';
+    // The above errors. Do the Transaction.create manually
+    var qry = 'INSERT INTO transaction (createdAt,updatedAt,amount,loan,lender) ' +
+              'VALUES (now(),now(),' + req.param('fund') + ',' + req.param('loanId') +',' + req.param('userId') + ')';
 
 
     Transaction.query(qry, function updateTransaction(err,trans){
+        // console.log('Server. Transaction added to MySQL');
     })
 
 
-  	trademore.createMultiSig(req.body.client_address, function(multiSig){
+  	trademore.createMultiSig(req.body.clientAddress, function(multiSig){
   			res.send(multiSig);
   		});
 
