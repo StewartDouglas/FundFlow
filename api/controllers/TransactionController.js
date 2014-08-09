@@ -2,16 +2,7 @@
  * TransactionController
  *
  * @module      :: Controller
- * @description	:: A set of functions called `actions`.
- *
- *                 Actions contain code telling Sails how to respond to a certain type of request.
- *                 (i.e. do stuff, then send some JSON, show an HTML page, or redirect to another URL)
- *
- *                 You can configure the blueprint URLs which trigger these actions (`config/controllers.js`)
- *                 and/or override them with custom routes (`config/routes.js`)
- *
- *                 NOTE: The code you write here supports both HTTP and Socket.io automatically.
- *
+ * @description	:: Actions for manipulting transactions
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 
@@ -24,34 +15,28 @@ module.exports = {
 
     var trademore = require('../../lib/trademore');
 
-    //console.log('loan: '+ req.param('loan_id'))
-    //console.log('amount: '+ req.param('fund'))
-
-    /*  
-    var transObj = {
-      loan: req.param('loan_id'),
-      amount: req.param('fund')
-    };
-
-    // This throws an error
-    Transaction.create(transObj, function transCreated(err, trans){
-       console.log('Transaction created');
-    });
-    */
-
-    // The above errors. Do the Transaction.create manually
-    var qry = 'INSERT INTO transaction (createdAt,updatedAt,amount,loan,lender) ' +
-              'VALUES (now(),now(),' + req.param('fund') + ',' + req.param('loanId') +',' + req.param('userId') + ')';
-
-
-    Transaction.query(qry, function updateTransaction(err,trans){
-        // console.log('Server. Transaction added to MySQL');
-    })
-
-
   	trademore.createMultiSig(req.body.clientAddress, function(multiSig){
-  			res.send(multiSig);
-  		});
+       
+      var transObj = {
+        createAt: new Date(),
+        updatedAt: new Date(),
+        amount: req.param('fund'),      
+        loan: req.param('loanId'),
+        lender: req.param('userId'),
+        toaddress: multiSig
+      };
+
+      Transaction.create(transObj, function transCreated(err, trans){
+
+        // Create JSON here
+        var response = {ms: multiSig, id: trans.id}; 
+        var responseJSON = JSON.stringify(response);
+        res.write(responseJSON);
+        res.end();
+
+      }); // Transaction.create
+
+  	}); // trademore.createMultiSig
 
   }, // create
 
@@ -70,6 +55,13 @@ module.exports = {
       if(validity==true)
       {
         res.send(200, {status: 'ok'});
+        Transaction.update({id: req.body.transID}, {txid: req.body.txid} , function(err, conf){
+
+          if(err) { console.log('Error trying to update Transaction: ' + err) }
+          else { console.log('Transaction updated') }
+
+
+        })
       }
       else
       {
@@ -79,6 +71,45 @@ module.exports = {
 
     });
 
-  } // confirm
+  }, // confirm
+
+  release: function(req,res){
+
+    var FormData = require('form-data');
+    var trademore = require('../../lib/trademore');
+
+    console.log('Step 9. Server. Releasing funds for loan: ' + req.body.loanId);
+
+    // get deposits associated with loanId
+    Transaction.find({loan: req.body.loanId}, function(err, deposits){
+
+      for(i in deposits)
+      {
+        // create the transaction: deposit --> borrower
+        trademore.createrawtransaction(deposits[i].txid, 'mnedNAgowyPETk2ym4a3b8sCyzh65wEuiA', 0.00001, function(rawtransaction){
+
+            // sign the transaction
+            trademore.signrawtransaction(rawtransaction, function(signedtransaction){
+
+              // save the output in MySQL, so lender can sign and broadcast              
+              console.log('signedtransaction: ' + signedtransaction); 
+              var withdrawForm = new FormData();
+              withdrawForm.append('signedtransaction', signedtransaction);
+              withdrawForm.append('lenderID', req.body.lender);
+              withdrawForm.submit('http://localhost:1337/withdrawal/create', function(err, response){
+                // withdrawal created
+              }); // withdrawForm.submit
+
+
+            }) // signrawtransaction
+        }); // createrawtransaction
+
+      } // for
+
+    }); // Transaction.find
+
+    res.send(200);
+
+  } // release
 
 }

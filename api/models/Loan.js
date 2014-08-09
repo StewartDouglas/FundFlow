@@ -2,7 +2,7 @@
  * Loan
  *
  * @module      :: Model
- * @description :: A short summary of how this model works and what it represents.
+ * @description :: A representation of a Loan
  * @docs		:: http://sailsjs.org/#!documentation/models
  */
 
@@ -62,6 +62,11 @@ module.exports = {
     amountFunded: {
       type: 'FLOAT',
       required: true,
+    },
+
+    // The address to send BTC funds
+    sendaddress: {
+      type: 'string'
     },
 
     toJSON: function() {

@@ -1,16 +1,16 @@
 {
-  "name": "activityOverlord",
+  "name": "trademore",
   "private": true,
-  "version": "0.0.0",
-  "description": "a Sails application",
+  "version": "0.0.1",
+  "description": "Bitcoin lending",
   "dependencies": {
-    "sails": "~0.9.7",
+    "sails": "0.10.2",
     "grunt": "0.4.1",
-    "sails-disk": "~0.9.0",
+    "sails-disk": "*",
     "ejs": "0.8.4",
     "optimist": "0.3.4",
     "bcrypt": "~0.7.6",
-    "sails-mysql": "0.9.x",
+    "sails-mysql": "0.10.5",
     "bitcoin": "*",
     "form-data": "*"
 

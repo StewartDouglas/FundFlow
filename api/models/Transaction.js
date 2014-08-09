@@ -15,18 +15,26 @@ module.exports = {
   	// The amount deposited
     amount: {
     	type: 'FLOAT',
-    	require: true
+    	required: true
     },
 
     loan: {
     	type: 'INTEGER',
-    	require: true
+    	required: true
     },
 
     // Should be a Foreign Key of User::id
     lender: {
     	type: 'INTEGER',
-    	require: true
+    	required: true
+    },
+
+    toaddress: {
+    	type: 'string'
+    },
+
+    txid: {
+    	type: 'string'
     }
     
   }

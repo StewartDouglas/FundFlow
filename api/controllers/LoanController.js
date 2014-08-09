@@ -28,8 +28,6 @@ module.exports = {
 
   	console.log('Creating loan now');
 
-    //console.log(req.session.User.id);
-
     var loanObj = {
 
       borrower: req.session.User.id,
@@ -41,8 +39,6 @@ module.exports = {
       num_coupons: 12,
       beginning: new Date(),
       completion:new Date(),
-      createdAt: new Date(),
-      updatedAt: new Date(),
       expires: new Date(),
       amountFunded: 0,
       // **********************
@@ -70,11 +66,11 @@ module.exports = {
   	})
 
 
-  },
+  }, // create
 
   created: function(req,res){
   	res.view();
-  },
+  }, // created
 
   show: function(req,res){
 
@@ -98,7 +94,7 @@ module.exports = {
         loan: loan
       });
     });
-  },
+  }, // show
 
   fund: function(req,res){
     Loan.findOne(req.param('id'), function foundLoan(err, loan){
@@ -106,7 +102,7 @@ module.exports = {
         loan: loan
       });
     });
-  },
+  }, // fund
 
   giveFunds: function(req,res){
 
@@ -125,17 +121,22 @@ module.exports = {
       createForm.append('loanId', req.param('id'));
       createForm.append('fund', req.param('fund'));
       createForm.append('userId', req.session.User.id)
-      createForm.submit('http://localhost:1337/transaction/create', function(err,res1){
+      createForm.submit('http://localhost:1337/transaction/create', function(err,responseMultiSig){
 
-    /************************************
-        
-          console.log('Step 4. Client. Receive MultiSig address: ' + res1);
+          if(err) { console.log('Error: ' + error); }
+
+          var resultObject; // store response of /create
+
+          responseMultiSig.on("data", function(ms) {
+            resultObject = JSON.parse(ms);
+            console.log('Step 4. Client. Receive MultiSig address: ' + resultObject.ms + '; and TransactionID: ' + resultObject.id);
+          });
+
+      // COMMENT OUT HERE
 
           // 1) Calcualte 5% of amount funded
           // 2) Get BTC/GBP exchange rate
           // 3) Convert to BTC
-          // prompt the user whether they wish to continue
-          // e.g using jQuery & Bootstrap
           // ** Also, generate full transaction but don't broadcast?
 
           // send the deposit
@@ -150,55 +151,70 @@ module.exports = {
 
               confirmForm.append('txid', txid);
               confirmForm.append('fund', req.param('fund'));
-              confirmForm.submit('http://localhost:1337/transaction/confirm', function(err,res){
+              confirmForm.append('transID', resultObject.id);
+              confirmForm.submit('http://localhost:1337/transaction/confirm', function(err,resp){
 
-                 console.log('Step 8. Client. Receive confirmation message: ' + res); 
+                 console.log('Step 8. Client. Receive confirmation message: ' + resp); 
 
-                 // var transQuery = 'INSERT INTO '
+                 // CAN BE CUT-PASTE OUT
+                  // Use adapter here instead? e.g. .update()
+                  var qry = 'UPDATE loan ' +
+                            'SET amountFunded=amountFunded+' + req.param('fund') + ' ' +
+                            'WHERE id='+ req.param('id')
+
+                  Loan.query(qry, function updatedLoan(err, loan){
+
+                    // ** Handle possible errors **
+
+                    // ** Handle case where we have reached our target ** 
+                    Loan.findOne(req.param('id'), function foundLoan(err, updateLoan){
+
+                      if(err) 
+                      { 
+                        console.log('Error: ' + err)
+                      }
+                      else // we found a loan
+                      {
+                        if(updateLoan.amountFunded >= updateLoan.amount){
+                            console.log('Loan ' + updateLoan.id + ' has been fully funded.');
+                            Loan.update({id: updateLoan.id},{fullyFunded : 1},function(err,fundedLoan){
+                              if(err) { console.log('Error trying to update loan'); }
+                              else { console.log('Loan status updated to fully funded'); }
+                            }); // Loan.update
+                          
+                          // ** loan has been fully funded. release the funds **
+                          var releaseForm = new FormData();
+                          releaseForm.append('loanId', updateLoan.id);
+                          releaseForm.append('lender', req.session.User.id);
+                          releaseForm.submit('http://localhost:1337/transaction/release', function(err, release){
+                            console.log('Executing Transaction::release');
+
+                            res.redirect('/loan/show');
+
+                          }); //releaseForm.submit
+                        } // if
+                        else {
+                          res.redirect('/loan/show');
+                        }; // else
+                      }; // else
+                    }); // Loan.findOne
+                    
+                   }); // Loan.query
+
+
+                 // CAN BE CUT-PASTE OUT
 
               }); // confirmForm.submit
             //}); // request.get -- CSRF
           }); // trademore.send 
   
-    ************************************/
+      // COMMENT OUT HERE
 
       }); // createForm.submit 
+
+
     }); // trademore.getnewaddress
-    
-
-
-    var qry = 'UPDATE loan ' +
-              'SET amountFunded=amountFunded+' + req.param('fund') + ' ' +
-              'WHERE id='+ req.param('id')
-
-    Loan.query(qry, function updatedLoan(err, loan){
-
-      // ** Handle possible errors **
-
-      // ** Handle case where we have reached our target ** 
-      Loan.findOne(req.param('id'), function foundLoan(err, updateLoan){
-
-        if(err) 
-        { 
-          console.log('Error: ' + err)
-        }
-        else // we found a loan
-        {
-          if(updateLoan.amountFunded >= updateLoan.amount){
-            console.log('Loan ' + updateLoan.id + ' has been fully funded.');
-            Loan.update({id: updateLoan.id},{fullyFunded : 1},function(err,fundedLoan){
-              if(err) { console.log('Error trying to update loan'); }
-              else { console.log('Loan status updated to fully funded'); }
-            }); // Loan.update
-          }; // if
-        }; // else
-      }); // Loan.findOne
-      
-      res.redirect('/loan/show');
-
-    })
-
-  },
+  }, // give Funds
 
   destroy: function(req, res, next){
 
@@ -215,7 +231,7 @@ module.exports = {
 
         // ** Publish update 
 
-      })
+      }); // Loan.destroy
 
       res.redirect('/user/show/'+req.session.User.id);
 
