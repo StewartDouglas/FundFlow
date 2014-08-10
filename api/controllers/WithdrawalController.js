@@ -8,10 +8,16 @@
 module.exports = {
     
   create: function(req,res){
-  	
+
+  	console.log('req.body.loanID: ' + req.body.loanID);
+  	console.log('req.body.lenderID: ' + req.body.lenderID);
+  	console.log('req.body.transactionID: ' + req.body.transactionID);
+
   	var withdObj = {
   		signature: req.body.signedtransaction,
-  		lender: req.body.lenderID,
+  		lenderID: req.body.lenderID,
+  		transactionID: req.body.transactionID,
+  		loanID: req.body.loanID,
   		outstanding: true
   	};
 
@@ -21,6 +27,13 @@ module.exports = {
 
   	}); // Withdrawal.create
 
-  } // create
+  }, // create
   
+  confirm: function(req,res){
+
+  	Withdrawal.findOne(req.param('id'), function withdrawalFound(err, withdrawal){
+
+  	});
+  } // confirm
+
 };

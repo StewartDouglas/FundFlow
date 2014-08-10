@@ -18,8 +18,6 @@ module.exports = {
   	trademore.createMultiSig(req.body.clientAddress, function(multiSig){
        
       var transObj = {
-        createAt: new Date(),
-        updatedAt: new Date(),
         amount: req.param('fund'),      
         loan: req.param('loanId'),
         lender: req.param('userId'),
@@ -27,6 +25,8 @@ module.exports = {
       };
 
       Transaction.create(transObj, function transCreated(err, trans){
+
+        if(err) { console.log('Error creating transaction: ' + err); }
 
         // Create JSON here
         var response = {ms: multiSig, id: trans.id}; 
@@ -83,6 +83,10 @@ module.exports = {
     // get deposits associated with loanId
     Transaction.find({loan: req.body.loanId}, function(err, deposits){
 
+      // console.log('lenderID: ' + deposits[0].lender);
+      // console.log('transactionID: ' + deposits[0].id);
+      // console.log('loanID:' + deposits[0].loan);
+
       for(i in deposits)
       {
         // create the transaction: deposit --> borrower
@@ -92,15 +96,17 @@ module.exports = {
             trademore.signrawtransaction(rawtransaction, function(signedtransaction){
 
               // save the output in MySQL, so lender can sign and broadcast              
-              console.log('signedtransaction: ' + signedtransaction); 
+              //console.log('signedtransaction: ' + signedtransaction); 
               var withdrawForm = new FormData();
               withdrawForm.append('signedtransaction', signedtransaction);
-              withdrawForm.append('lenderID', req.body.lender);
+              withdrawForm.append('lenderID', deposits[i].lender);
+              withdrawForm.append('transactionID', deposits[i].id);
+              withdrawForm.append('loanID', deposits[i].loan);
+
+
               withdrawForm.submit('http://localhost:1337/withdrawal/create', function(err, response){
-                // withdrawal created
+              
               }); // withdrawForm.submit
-
-
             }) // signrawtransaction
         }); // createrawtransaction
 

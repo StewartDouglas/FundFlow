@@ -16,12 +16,20 @@ module.exports = {
   		type: 'string'
   	},
 
-  	lender: {
+  	lenderID: {
   		type: 'integer'
   	},
 
   	outstanding: {
   		type: 'boolean'
+  	},
+
+  	transactionID: {
+  		type: 'integer'
+  	},
+
+  	loanID: {
+  		type: 'integer'
   	}
 
   }

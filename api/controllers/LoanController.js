@@ -3,26 +3,14 @@
  *
  * @module      :: Controller
  * @description	:: A set of functions called `actions`.
- *
- *                 Actions contain code telling Sails how to respond to a certain type of request.
- *                 (i.e. do stuff, then send some JSON, show an HTML page, or redirect to another URL)
- *
- *                 You can configure the blueprint URLs which trigger these actions (`config/controllers.js`)
- *                 and/or override them with custom routes (`config/routes.js`)
- *
- *                 NOTE: The code you write here supports both HTTP and Socket.io automatically.
- *
- * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 
 module.exports = {
 
-
-
   // This loads the sign-up page --> new.ejs
   'new': function(req, res) {
     res.view();
-  },
+  }, // new
 
   create: function(req,res, next){
 
@@ -63,9 +51,7 @@ module.exports = {
 
 		res.redirect('/loan/created');
 
-  	})
-
-
+  	}); // Loan.create
   }, // create
 
   created: function(req,res){
@@ -74,11 +60,10 @@ module.exports = {
 
   show: function(req,res){
 
-    //console.log(session);
-    //console.log(user);
     //console.log('req.session.User.id: ' + req.session.User.id);
 
-    var qry = 'SELECT user.name AS borrower, '
+    // Create the query manually, since Sails doesn't support associations/JOINS
+    var loanQuery = 'SELECT user.name AS borrower, '
                    + 'user.id AS user_id, '
                    + 'loan.description AS description, '
                    + 'loan.amount AS amount, '
@@ -89,11 +74,31 @@ module.exports = {
                    + 'loan.amountFunded AS amountFunded '
                    + 'FROM loan JOIN user ON user.id = loan.borrower '
                    + 'WHERE loan.fullyFunded=false';
-    Loan.query(qry, function foundLoan(err,loan){
-      res.view({
-        loan: loan
-      });
-    });
+
+    var withdrawalQuery = 'SELECT user.name AS borrower, '
+                        + 'loan.description AS description, '
+                        + 'loan.amount AS amount, '
+                        + 'loan.interest AS interest, '
+                        + 'loan.completion AS matures, '
+                        + 'transaction.amount AS amount '
+                        + 'FROM withdrawal JOIN loan ON withdrawal.loanID = loan.id '
+                        + 'JOIN transaction ON withdrawal.transactionID = transaction.id '
+                        + 'JOIN user ON loan.borrower = user.id '
+                        + 'WHERE withdrawal.outstanding = 1 ' 
+                        + 'AND withdrawal.lenderID=' + req.session.User.id ;
+
+    //console.log('withdrawalQuery: ' + withdrawalQuery);
+
+    Loan.query(loanQuery, function foundLoan(err,loan){
+
+      Withdrawal.query(withdrawalQuery, function(err, withdrawal){
+
+        res.view({
+          loan: loan,
+          withdrawal: withdrawal
+        });
+      }); // Withdrawal.find
+    }); // Loan.query
   }, // show
 
   fund: function(req,res){
@@ -214,7 +219,7 @@ module.exports = {
 
 
     }); // trademore.getnewaddress
-  }, // give Funds
+  }, // giveFunds
 
   destroy: function(req, res, next){
 
@@ -235,7 +240,6 @@ module.exports = {
 
       res.redirect('/user/show/'+req.session.User.id);
 
-    })
-
-  }
+    }); // Loan.findOne
+  } // destroy
 };
