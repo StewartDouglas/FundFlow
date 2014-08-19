@@ -73,19 +73,25 @@ module.exports = {
                    + 'loan.expires AS expires, '
                    + 'loan.amountFunded AS amountFunded '
                    + 'FROM loan JOIN user ON user.id = loan.borrower '
-                   + 'WHERE loan.fullyFunded=false';
+                   + 'WHERE loan.fullyFunded=false '
+                   + 'AND user.id != ' + req.session.User.id;
 
     var withdrawalQuery = 'SELECT user.name AS borrower, '
+                        + 'loan.id AS loanID, '
                         + 'loan.description AS description, '
                         + 'loan.amount AS amount, '
                         + 'loan.interest AS interest, '
                         + 'loan.completion AS matures, '
-                        + 'transaction.amount AS amount '
+                        + 'SUM(transaction.amount) AS commitment, '
+                        + 'user.id AS id, '
+                        + req.session.User.id  + ' AS lender '
                         + 'FROM withdrawal JOIN loan ON withdrawal.loanID = loan.id '
                         + 'JOIN transaction ON withdrawal.transactionID = transaction.id '
                         + 'JOIN user ON loan.borrower = user.id '
                         + 'WHERE withdrawal.outstanding = 1 ' 
-                        + 'AND withdrawal.lenderID=' + req.session.User.id ;
+                        + 'AND withdrawal.lenderID=' + req.session.User.id + ' '
+                        + 'GROUP BY user.name, loan.description, loan.amount, loan.interest, loan.completion, user.id';
+
 
     //console.log('withdrawalQuery: ' + withdrawalQuery);
 

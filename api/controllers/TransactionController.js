@@ -73,6 +73,7 @@ module.exports = {
 
   }, // confirm
 
+  // 
   release: function(req,res){
 
     var FormData = require('form-data');
@@ -90,22 +91,23 @@ module.exports = {
       for(i in deposits)
       {
         // create the transaction: deposit --> borrower
+        // createrawtransaction(source,destination,amount,callback)
         trademore.createrawtransaction(deposits[i].txid, 'mnedNAgowyPETk2ym4a3b8sCyzh65wEuiA', 0.00001, function(rawtransaction){
 
             // sign the transaction
             trademore.signrawtransaction(rawtransaction, function(signedtransaction){
 
               // save the output in MySQL, so lender can sign and broadcast              
-              //console.log('signedtransaction: ' + signedtransaction); 
+              // console.log('signedtransaction: ' + signedtransaction); 
               var withdrawForm = new FormData();
               withdrawForm.append('signedtransaction', signedtransaction);
               withdrawForm.append('lenderID', deposits[i].lender);
               withdrawForm.append('transactionID', deposits[i].id);
               withdrawForm.append('loanID', deposits[i].loan);
-
-
               withdrawForm.submit('http://localhost:1337/withdrawal/create', function(err, response){
               
+                res.send(200);
+
               }); // withdrawForm.submit
             }) // signrawtransaction
         }); // createrawtransaction

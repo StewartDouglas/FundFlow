@@ -3,36 +3,76 @@
 		<h1><%= user.name %> 
 			<small><%= user.email %> </small>
 		</h1>
-		
-		<hr>
 
-		<h1> Outstanding Loans </h1>
-			<table class="table table-striped">
-			<tr>
-				<th>Description</th>
-				<th>Amount</th>
-				<th>Interest</th>
-				<th>Expires</th>
-				<th>Funded</th>
-				<th></th>
-			</tr>
-			<% for(var i=0; i<loan.length; i++) {%>
-			<tr>
-			   <td><%= loan[i].description %></td>
-			   <td><%= loan[i].amount %></td>
-			   <td><%= loan[i].interest %></td>
-			   <td><%= loan[i].expires %></td>
-			   <td><%= loan[i].amountFunded %></td>
+		<% if(typeof fullyfunded != 'undefined'){ %>		
+			<% if(fullyfunded.length>0){ %>
+				<hr>
+				<h1> Funded Loans </h1>
+					<table class="table table-striped">
+					<tr>
+						<th>Description</th>
+						<th>Amount</th>
+						<th>Interest</th>
+						<th>Expires</th>
+						<th>Funded</th>
+						<th></th>
+					</tr>
+					<% for(var i=0; i<fullyfunded.length; i++) {%>
+					<tr>
+					   <td><%= fullyfunded[i].description %></td>
+					   <td><%= fullyfunded[i].amount %></td>
+					   <td><%= fullyfunded[i].interest %></td>
+					   <td><%= fullyfunded[i].expires %></td>
+					   <td><%= fullyfunded[i].amountFunded %></td>
 
-			   	<td><form action="/loan/destroy/<%= loan[i].id %>" method="POST">
-					<input type="hidden" name="_method" value="delete"/>
-					<input type="submit" class="btn btn-sm btn-danger" value="Cancel"/>
-					<input type="hidden" name="_csrf" value="<%= _csrf %>" />
-				</form></td>
-			</tr>
+					   	<td><form action="/loan/destroy/<%= fullyfunded[i].id %>" method="POST">
+							<input type="hidden" name="_method" value="delete"/>
+							<input type="submit" class="btn btn-sm btn-danger" value="Cancel"/>
+							<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+						</form></td>
+					</tr>
+					<% } %>
+				</table>
+			<% } %>			
+		<% } %>	
+
+		<% if(typeof outstanding != 'undefined'){ %>			
+			<% if(outstanding.length>0){ %>
+				<hr>
+				<h1> Outstanding Loans </h1>
+					<table class="table table-striped">
+					<tr>
+						<th>Description</th>
+						<th>Amount</th>
+						<th>Interest</th>
+						<th>Expires</th>
+						<th>Funded</th>
+						<th></th>
+					</tr>
+					<% for(var i=0; i<outstanding.length; i++) {%>
+					<tr>
+					   <td><%= outstanding[i].description %></td>
+					   <td><%= outstanding[i].amount %></td>
+					   <td><%= outstanding[i].interest %></td>
+					   <td><%= outstanding[i].expires %></td>
+					   <td><%= outstanding[i].amountFunded %></td>
+
+					   	<td><form action="/loan/destroy/<%= outstanding[i].id %>" method="POST">
+							<input type="hidden" name="_method" value="delete"/>
+							<input type="submit" class="btn btn-sm btn-danger" value="Cancel"/>
+							<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+						</form></td>
+					</tr>
+					<% } %>
+				</table>
 			<% } %>
-		</table>
-		
+		<% } %>	
+
+
+
+
+
+
 	</div>
 </div>
 

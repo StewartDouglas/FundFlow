@@ -13,7 +13,6 @@ module.exports = {
   },
 
   create: function(req, res, next) {
-
     var userObj = {
       name: req.param('name'),
       title: req.param('title'),
@@ -69,17 +68,24 @@ module.exports = {
     User.findOne(req.param('id'), function foundUser(err, user) {
       if (err) return next(err);
       if (!user) return next();
-      var qry = 'SELECT * FROM loan where borrower='+req.param('id');
-      Loan.query(qry, function foundLoans(err,loan){
-
+      //var qry = 'SELECT * FROM loan where borrower='+req.param('id');
+      Loan.find({borrower: req.param('id'), fullyFunded: 0}, function foundLoans(err,outstanding){
         // ** Need to handle case where user has no loans **
 
-        if(err) return next(err);
-        res.view({
-          user: user,
-          loan: loan
-        });
-      });
+        Loan.find({borrower: req.param('id'), fullyFunded: 1}, function fullFunded(err, fullyfunded) {
+
+          //console.log(outstanding);
+          //console.log(fullyfunded);
+
+          if(err) return next(err);
+          res.view({
+            user: user,
+            outstanding: outstanding,
+            fullyfunded: fullyfunded
+          }); // res.view
+
+        }); // Loan.find() fullyfunded
+      }); // Loan.find() outstanding 
     });
   },
 

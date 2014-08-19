@@ -2,7 +2,7 @@
  * Withdrawal
  *
  * @module      :: Model
- * @description :: Description of withdrawals from the deposit esrow accounts
+ * @description :: Description of withdrawals from the deposit escrow accounts
  */
 
 module.exports = {
@@ -30,7 +30,12 @@ module.exports = {
 
   	loanID: {
   		type: 'integer'
-  	}
+  	},
+
+    // signed by platform
+    unsignedtx: {
+      type: 'string'
+    }
 
   }
 
