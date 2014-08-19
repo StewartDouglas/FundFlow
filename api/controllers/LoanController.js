@@ -248,4 +248,5 @@ module.exports = {
 
     }); // Loan.findOne
   } // destroy
+  
 };

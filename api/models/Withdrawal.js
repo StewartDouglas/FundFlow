@@ -9,6 +9,12 @@ module.exports = {
 
   schema: true,
 
+  types: {
+    size: function() {
+       return true;
+    }
+  },
+
   attributes: {
   	
   	// signed raw transaction
@@ -32,9 +38,10 @@ module.exports = {
   		type: 'integer'
   	},
 
-    // signed by platform
+    // signed by platform, but not yet by user
     unsignedtx: {
-      type: 'string'
+      type: 'string',
+      size: 500
     }
 
   }

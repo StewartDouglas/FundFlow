@@ -1,0 +1,111 @@
+[34mdebug: [39m[90m--------------------------------------------------------[39m
+[34mdebug: [39m[90m:: Tue Aug 19 2014 13:17:52 GMT-0400 (EDT)[39m
+[34mdebug: [39mEnvironment : development
+[34mdebug: [39mPort        : 1337
+[34mdebug: [39m[90m--------------------------------------------------------[39m
+[34mdebug: [39m[1mDeprecated:   `Model.subscribe(socket, null, ...)`[22m
+[34mdebug: [39mSee [4mhttp://links.sailsjs.org/docs/config/pubsub[24m
+[34mdebug: [39m[90m(⌘ + double-click to open link from terminal)[39m
+[34mdebug: [39mPlease use instance rooms instead (or raw sails.sockets.*() methods.)
+
+/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/lib/trademore.js:110
+		client.sendRawTransaction(,function(err,confirmation){
+		                          ^
+[31merror: [39mServer Error (500)
+[31merror: [39mSyntaxError: Unexpected token ,
+  at Module._compile (module.js:439:25)
+  at Object.Module._extensions..js (module.js:474:10)
+  at Module.load (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/coffee-script/lib/coffee-script/register.js:45:36)
+  at Function.Module._load (module.js:312:12)
+  at Module.require (module.js:364:17)
+  at require (module.js:380:17)
+  at module.exports.confirm (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/api/controllers/WithdrawalController.js:33:21)
+  at routeTargetFnWrapper (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/lib/router/bind.js:178:5)
+  at callbacks (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:164:37)
+  at param (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:138:11)
+  at param (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:135:11)
+  at pass (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:145:5)
+  at nextRoute (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:100:7)
+  at callbacks (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:167:11)
+  at /Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/lib/router/bind.js:186:7
+  at module.exports (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/api/policies/flash.js:5:33)
+  at routeTargetFnWrapper (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/lib/router/bind.js:178:5)
+  at callbacks (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:164:37)
+  at param (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:138:11)
+  at param (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:135:11)
+  at pass (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:145:5)
+  at nextRoute (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:100:7)
+  at callbacks (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:167:11)
+  at /Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/lib/router/bind.js:186:7
+  at clearHeaders (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/lib/hooks/cors/index.js:211:3)
+  at routeTargetFnWrapper (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/lib/router/bind.js:178:5)
+  at callbacks (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:164:37)
+  at param (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:138:11)
+  at pass (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:145:5)
+  at nextRoute (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:100:7)
+  at callbacks (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:167:11)
+  at /Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/lib/router/bind.js:186:7
+  at sails.router.bind._middlewareType (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/lib/hooks/csrf/index.js:87:11)
+  at routeTargetFnWrapper (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/lib/router/bind.js:178:5)
+  at callbacks (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:164:37)
+  at param (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:138:11)
+  at pass (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:145:5)
+  at nextRoute (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:100:7)
+  at callbacks (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:167:11)
+  at /Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/lib/router/bind.js:186:7
+  at _addResViewMethod (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/lib/hooks/views/res.view.js:323:3)
+  at routeTargetFnWrapper (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/lib/router/bind.js:178:5)
+  at callbacks (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:164:37)
+  at param (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:138:11)
+  at pass (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:145:5)
+  at nextRoute (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:100:7)
+  at callbacks (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:167:11)
+  at /Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/lib/router/bind.js:186:7
+  at /Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/lib/hooks/i18n/index.js:36:7
+  at Object.i18nInit [as init] (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/i18n/i18n.js:89:5)
+  at addLocalizationMethod (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/lib/hooks/i18n/index.js:34:11)
+  at routeTargetFnWrapper (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/lib/router/bind.js:178:5)
+  at callbacks (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:164:37)
+  at param (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:138:11)
+  at pass (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:145:5)
+  at nextRoute (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:100:7)
+  at callbacks (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:167:11)
+  at /Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/lib/router/bind.js:186:7
+  at addOriginHeader (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/lib/hooks/sockets/lib/index.js:261:18)
+  at routeTargetFnWrapper (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/lib/router/bind.js:178:5)
+  at callbacks (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:164:37)
+  at param (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:138:11)
+  at pass (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:145:5)
+  at nextRoute (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:100:7)
+  at callbacks (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:167:11)
+  at /Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/lib/router/bind.js:186:7
+  at addResponseMethods (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/lib/hooks/responses/index.js:177:11)
+  at routeTargetFnWrapper (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/lib/router/bind.js:178:5)
+  at callbacks (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:164:37)
+  at param (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:138:11)
+  at pass (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:145:5)
+  at nextRoute (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:100:7)
+  at callbacks (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:167:11)
+  at /Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/lib/router/bind.js:186:7
+  at /Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/lib/hooks/request/index.js:109:13
+  at /Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/connect-flash/lib/flash.js:21:5
+  at addMixins (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/lib/hooks/request/index.js:88:11)
+  at routeTargetFnWrapper (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/lib/router/bind.js:178:5)
+  at callbacks (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:164:37)
+  at param (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:138:11)
+  at pass (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:145:5)
+  at Router._dispatch (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:173:5)
+  at Object.router (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/lib/router/index.js:33:10)
+  at next (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/node_modules/connect/lib/proto.js:195:15)
+  at Object.xPoweredBy [as handle] (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/lib/hooks/http/middleware/defaults.js:176:7)
+  at next (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/node_modules/connect/lib/proto.js:195:15)
+  at Object.methodOverride [as handle] (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/node_modules/connect/lib/middleware/methodOverride.js:48:5)
+  at next (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/node_modules/connect/lib/proto.js:195:15)
+  at next (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/node_modules/connect/lib/proto.js:197:9)
+  at Object._parseHTTPBody [as handle] (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/skipper/index.js:62:14)
+  at next (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/node_modules/connect/lib/proto.js:195:15)
+  at next (/Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/node_modules/connect/lib/middleware/session.js:311:9)
+  at /Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/node_modules/connect/lib/middleware/session.js:335:9
+  at /Users/stewart/Documents/My Work/1) ICL/*BitCoin/App/trademore/node_modules/sails/node_modules/express/node_modules/connect/lib/middleware/session/memory.js:50:9
+  at process._tickDomainCallback (node.js:459:13)
+

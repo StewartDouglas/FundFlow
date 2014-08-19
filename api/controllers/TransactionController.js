@@ -92,13 +92,15 @@ module.exports = {
       {
         // create the transaction: deposit --> borrower
         // createrawtransaction(source,destination,amount,callback)
-        trademore.createrawtransaction(deposits[i].txid, 'mnedNAgowyPETk2ym4a3b8sCyzh65wEuiA', 0.00001, function(rawtransaction){
+        trademore.createrawtransaction(deposits[i].txid, 'n4kYGAvhsVZWpVgYSYZneSr2KTRiAUWHye', 0.00001, function(rawtransaction){
 
             // sign the transaction
             trademore.signrawtransaction(rawtransaction, function(signedtransaction){
 
               // save the output in MySQL, so lender can sign and broadcast              
-              // console.log('signedtransaction: ' + signedtransaction); 
+              console.log('Preparing to execute withdrawal/create'); 
+              console.log('signedtransaction: ' + signedtransaction)
+              //console.log('signedtransaction.toString(): ' + signedtransaction.toString());
               var withdrawForm = new FormData();
               withdrawForm.append('signedtransaction', signedtransaction);
               withdrawForm.append('lenderID', deposits[i].lender);
