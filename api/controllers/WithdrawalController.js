@@ -23,7 +23,7 @@ module.exports = {
   	Withdrawal.create(withdObj, function (err, withdrawal){
 
       if(err) { console.log('Error attempting to create a withdrawal: ' + err) }
-  		console.log('Withdrawal created, with id: ' + withdrawal.id);
+  		//console.log('Withdrawal created, with id: ' + withdrawal.id);
       res.send(200);
 
   	}); // Withdrawal.create
@@ -38,14 +38,12 @@ module.exports = {
       .where({lenderID: req.query.lender })
       .exec(function withdrawalFound(err, withdrawal){
 
-      console.log('JSON.stringify(withdrawal): ' + JSON.stringify(withdrawal))
-
       // iterate over each unsigned withdrawal, and sign it
       for(i in withdrawal)
       {
-        //console.log('withdrawal[i].unsignedtx: ' + withdrawal[i].unsignedtx);
         trademore.signrawtransaction(withdrawal[i].unsignedtx, function(signedtransaction){ 
-
+          console.log('Client. 10.1. Signining transaction: ' + signedtransaction);
+          
           // update the Withdrawal table
           Withdrawal.update( {id: withdrawal[i].id}, {outstanding: 0}, function(){
           });
@@ -53,7 +51,7 @@ module.exports = {
           // now, broadcast the transaction
           trademore.sendrawtransaction(signedtransaction, function(confirmation){
 
-            console.log('Transaction broadcast: ' + confirmation);
+            console.log('Step 10.2. Client. Transaction broadcast: ' + confirmation);
 
           });
 

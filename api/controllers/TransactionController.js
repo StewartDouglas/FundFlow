@@ -37,7 +37,6 @@ module.exports = {
       }); // Transaction.create
 
   	}); // trademore.createMultiSig
-
   }, // create
 
   confirm: function(req,res){
@@ -70,7 +69,6 @@ module.exports = {
       }
 
     });
-
   }, // confirm
 
   // 
@@ -92,15 +90,13 @@ module.exports = {
       {
         // create the transaction: deposit --> borrower
         // createrawtransaction(source,destination,amount,callback)
-        trademore.createrawtransaction(deposits[i].txid, 'n4kYGAvhsVZWpVgYSYZneSr2KTRiAUWHye', 0.00001, function(rawtransaction){
+        trademore.createrawtransaction(deposits[i].txid, req.body.sendaddress, 0.00001, function(rawtransaction){
+          console.log('Step 9.1 Server. Creating transaction: ' + 0.00001 + ' BTC --> ' + req.body.sendaddress + ' ' + rawtransaction);
 
             // sign the transaction
             trademore.signrawtransaction(rawtransaction, function(signedtransaction){
-
+              console.log('Step 9.2 Server. Signing transaction: ' + signedtransaction);
               // save the output in MySQL, so lender can sign and broadcast              
-              console.log('Preparing to execute withdrawal/create'); 
-              console.log('signedtransaction: ' + signedtransaction)
-              //console.log('signedtransaction.toString(): ' + signedtransaction.toString());
               var withdrawForm = new FormData();
               withdrawForm.append('signedtransaction', signedtransaction);
               withdrawForm.append('lenderID', deposits[i].lender);
@@ -119,7 +115,6 @@ module.exports = {
     }); // Transaction.find
 
     res.send(200);
-
   } // release
 
 }

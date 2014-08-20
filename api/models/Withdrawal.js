@@ -41,7 +41,7 @@ module.exports = {
     // signed by platform, but not yet by user
     unsignedtx: {
       type: 'string',
-      size: 500
+      size: 1000
     }
 
   }

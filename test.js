@@ -1,6 +1,15 @@
-var FormData = require('form-data');
+var bitcoin = require('bitcoin');
+var client = new bitcoin.Client({
+	 host: 'localhost',
+	 port: 18332,
+	 user: 'bitcoinrpc',
+	 pass: 'rpcpw1234'
+});
 
-var myForm = new FormData();
-console.log('foo');
-myForm.append('test', '010000000130a8dba88e40eb6ad2d21909bdac555c3b1dba6fe1d46735a8df77f7a46984930000000000ffffffff01e8030000000000001976a914fedca7bc111e671e569e701959b95a00eee543af88ac00000000');
+client.getRawTransaction('130cb54b1462d8406d53f6f9a3a1a9743796d84150958f33b183ea42c65e8a2f',1,function(err,transaction){
 
+	if(err) { console.log('error: ' + err) }
+	else {
+		console.log(transaction);
+	}
+})

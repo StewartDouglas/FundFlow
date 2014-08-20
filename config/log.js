@@ -9,7 +9,7 @@
  * http://sailsjs.org/#documentation
  */
 
-module.exports = {
+
 
   // Valid `level` configs:
   // i.e. the minimum log level to capture with sails.log.*()
@@ -20,8 +20,36 @@ module.exports = {
   // 'info'	: Display calls from `.error()`, `.warn()`, `.debug()` to `.info()`
   // 'verbose': Display calls from `.error()`, `.warn()`, `.debug()`, `.info()` to `.verbose()`
   //
-  log: {
-    level: 'info'
-  }
 
-};
+
+  //var winston = require('winston');
+  module.exports = {
+
+    log: {
+     level: 'info'
+    }
+    
+      // 'log': {
+      //     'custom': new (winston.Logger)({
+      //         'transports': [
+      //             new (winston.transports.Console)({
+      //                 'level': 'info',
+      //                 'colorize': true,
+      //                 'timestamp': false,
+      //                 'json': false
+      //             }),
+      //             new winston.transports.File({
+      //                 'level': 'debug',
+      //                 'colorize': false,
+      //                 'timestamp': true,
+      //                 'json': true,
+      //                 'filename': './logs/trademore.log',
+      //                 'maxsize': 5120000,
+      //                 'maxFiles': 3
+      //             })
+      //         ]
+      //     })
+      // }
+
+  };
+

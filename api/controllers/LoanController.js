@@ -14,14 +14,13 @@ module.exports = {
 
   create: function(req,res, next){
 
-  	console.log('Creating loan now');
-
     var loanObj = {
 
       borrower: req.session.User.id,
       description: req.param('description'),
       amount: req.param('amount'),
       interest: req.param('interest'),
+      sendaddress: req.param('address'),
 
       // ** Current defaults **
       num_coupons: 12,
@@ -127,6 +126,8 @@ module.exports = {
     trademore.getnewaddress(function(clientAddress){
 
       console.log("Step 1. Client. Creates Address: " + clientAddress);
+      sails.log.debug("Step 1. Client. Creates Address: " + clientAddress);
+
 
       createForm.append('clientAddress', clientAddress);
       createForm.append('loanId', req.param('id'));
@@ -141,7 +142,6 @@ module.exports = {
           responseMultiSig.on("data", function(ms) {
             resultObject = JSON.parse(ms);
             console.log('Step 4. Client. Receive MultiSig address: ' + resultObject.ms + '; and TransactionID: ' + resultObject.id);
-          });
 
       // COMMENT OUT HERE
 
@@ -151,8 +151,8 @@ module.exports = {
           // ** Also, generate full transaction but don't broadcast?
 
           // send the deposit
-          // placeholder address and BTC
-          trademore.send('mnedNAgowyPETk2ym4a3b8sCyzh65wEuiA',0.00001,function(txid){
+          // placeholder BTC
+          trademore.send(resultObject.ms,0.00001,function(txid){
 
             console.log('Step 5. Client. Generate transaction with txid: ' + txid)
 
@@ -197,8 +197,9 @@ module.exports = {
                           var releaseForm = new FormData();
                           releaseForm.append('loanId', updateLoan.id);
                           releaseForm.append('lender', req.session.User.id);
+                          releaseForm.append('sendaddress', updateLoan.sendaddress);
                           releaseForm.submit('http://localhost:1337/transaction/release', function(err, release){
-                            console.log('Executing Transaction::release');
+                            
 
                             res.redirect('/loan/show');
 
@@ -219,6 +220,9 @@ module.exports = {
             //}); // request.get -- CSRF
           }); // trademore.send 
   
+        });      
+
+
       // COMMENT OUT HERE
 
       }); // createForm.submit 
@@ -248,5 +252,5 @@ module.exports = {
 
     }); // Loan.findOne
   } // destroy
-  
+
 };

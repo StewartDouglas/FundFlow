@@ -1,13 +1,7 @@
-<form action="/loan/create" method="POST" id="sign-up-form" class="form-signin">
+<form action="/loan/create" method="POST" id="loan-form" class="form-signin">
 	<h2 class="form-signin-heading">Apply for a loan</h2>
 
-
 	<!-- Need error handling logic -->
-
-
-
-
-
 
 	<div class="control-group">
 	<input type="number" class="form-control" placeholder="amount" name="amount">
@@ -19,6 +13,10 @@
 	
 	<div class="control-group">
 	<input type="text" class="form-control" placeholder="description" name="description">
+	</div>
+
+	<div class="control-group">
+	<input type="text" class="form-control" placeholder="bitcoin address" name="address">
 	</div>
 
 	<input type="submit" class="btn btn-lg btn-primary btn-block" value="Apply"/>

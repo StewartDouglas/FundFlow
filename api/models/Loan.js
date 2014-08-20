@@ -61,12 +61,15 @@ module.exports = {
     // Default = 0
     amountFunded: {
       type: 'FLOAT',
-      required: true,
+      required: true
     },
 
     // The address to send BTC funds
     sendaddress: {
-      type: 'string'
+      type: 'string',
+      required: true,
+      minLength: 27,
+      maxLength: 34
     },
 
     toJSON: function() {
