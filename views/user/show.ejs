@@ -1,6 +1,6 @@
 <div class='container'>
-	<div style="background-color: #eeeeee; border-radius: 20px; padding: 5px">
-		<h1><%= user.name %> 
+	<div style="background-color: #eeeeee; border-radius: 20px; padding: 15px">
+		<h1 style="padding: 0px; margin-top: 10px" ><%= user.name %> 
 			<small><%= user.email %> </small>
 		</h1>
 
@@ -22,12 +22,12 @@
 					   <td><%= fullyfunded[i].description %></td>
 					   <td><%= fullyfunded[i].amount %></td>
 					   <td><%= fullyfunded[i].interest %></td>
-					   <td><%= fullyfunded[i].expires %></td>
+				   	   <td><%= fullyfunded[i].expires.getDate() %> <%= months[fullyfunded[i].expires.getMonth()] %> <%= fullyfunded[i].expires.getFullYear() %></td>
 					   <td><%= fullyfunded[i].amountFunded %></td>
 
-					   	<td><form action="/loan/destroy/<%= fullyfunded[i].id %>" method="POST">
+					   	<td><form action="/loan/repay/<%= fullyfunded[i].id %>" method="POST" id="makeRepayment">
 							<input type="hidden" name="_method" value="delete"/>
-							<input type="submit" class="btn btn-sm btn-danger" value="Cancel"/>
+							<input type="submit" class="btn btn-sm btn-success" value="Repay"/>
 							<input type="hidden" name="_csrf" value="<%= _csrf %>" />
 						</form></td>
 					</tr>
@@ -54,11 +54,11 @@
 					   <td><%= outstanding[i].description %></td>
 					   <td><%= outstanding[i].amount %></td>
 					   <td><%= outstanding[i].interest %></td>
-					   <td><%= outstanding[i].expires %></td>
+				   		<td><%= outstanding[i].expires.getDate() %> <%= months[outstanding[i].expires.getMonth()] %> <%= outstanding[i].expires.getFullYear() %></td>
 					   <td><%= outstanding[i].amountFunded %></td>
 
 					   	<td><form action="/loan/destroy/<%= outstanding[i].id %>" method="POST">
-							<input type="hidden" name="_method" value="delete"/>
+							<input type="hidden" name="_method" value="Cancel"/>
 							<input type="submit" class="btn btn-sm btn-danger" value="Cancel"/>
 							<input type="hidden" name="_csrf" value="<%= _csrf %>" />
 						</form></td>
@@ -76,3 +76,24 @@
 	</div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="myRepaymentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Are you sure?</h4>
+      </div>
+      <div class="modal-body">
+
+      Are you sure you want to make your first repayment? <br/>
+      If you click Confirm your account will be debited 0.5 BTC
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="cancel">Cancel</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" id="confirm">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>

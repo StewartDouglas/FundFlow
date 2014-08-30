@@ -50,10 +50,27 @@ module.exports = {
 
       console.log('Step 7. Server. Server parses the transaction: ');
       console.log(transaction);
+      console.log('And now the vin scriptSig');
+      console.log(JSON.stringify(transaction.vin[0].scriptSig));
+      console.log('And now the 1st vout scriptSig');
+      console.log(JSON.stringify(transaction.vout[0].scriptPubKey));
+      console.log('And now the 2nd vout scriptSig');
+      console.log(JSON.stringify(transaction.vout[1].scriptPubKey));
 
       if(validity==true)
       {
         res.send(200, {status: 'ok'});
+
+        // GENERATE COUNTERPARTY TOKEN
+        /*
+          1) Create contract
+          2) Hash contract
+          3) Counterparty Issuance
+          4) Counterparty Send
+          send --source=[source] --asset=[asset] --quantity=[quantity] --destination=[destination]
+        */
+        // AND PLACE IN MULTISIG
+
         Transaction.update({id: req.body.transID}, {txid: req.body.txid} , function(err, conf){
 
           if(err) { console.log('Error trying to update Transaction: ' + err) }

@@ -2,6 +2,6 @@ This is a contract between _BORROWER_ and _LENDER_, written on _DATE_.
 
 _LENDER_ has loaned _BORROWER_ a total amount of _PRINCIPAL_.
 
-_BORROWER_ promises to pay this principal back, along with interest of _INTEREST_, in _NUM_PAYMENTS_ equal instalments of _INSTALLMENT_AMOUNT_ on the _DAY_ day of each month.
+_BORROWER_ promises to pay this principal back, along with interest of _INTEREST_, in _NUM_PAYMENTS_ equal instalments of _INSTALLMENT_AMOUNT_ beginning on _BEGINNING_.
 
-Should _BORROWER_ failed to pay on time any of these instalments then _BORROWER_ and _LENDER_ will enter mediation administered by _MEDIATOR_ who will determine the correct course of action. 
+Should _BORROWER_ fail to pay on time any of these instalments then _BORROWER_ and _LENDER_ will enter mediation administered by the court, which will determine the correct course of action. 

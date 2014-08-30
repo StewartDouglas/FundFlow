@@ -41,6 +41,8 @@ module.exports = {
       // iterate over each unsigned withdrawal, and sign it
       for(i in withdrawal)
       {
+
+
         trademore.signrawtransaction(withdrawal[i].unsignedtx, function(signedtransaction){ 
           console.log('Client. 10.1. Signining transaction: ' + signedtransaction);
           
@@ -52,6 +54,13 @@ module.exports = {
           trademore.sendrawtransaction(signedtransaction, function(confirmation){
 
             console.log('Step 10.2. Client. Transaction broadcast: ' + confirmation);
+
+            trademore.confirm(confirmation, function(transaction, validity){
+
+              console.log('Client. 10.3 Broadcast transaction: ' + JSON.stringify(transaction));
+          });
+
+
 
           });
 

@@ -91,16 +91,17 @@ module.exports = {
                         + 'AND withdrawal.lenderID=' + req.session.User.id + ' '
                         + 'GROUP BY user.name, loan.description, loan.amount, loan.interest, loan.completion, user.id';
 
-
-    //console.log('withdrawalQuery: ' + withdrawalQuery);
-
     Loan.query(loanQuery, function foundLoan(err,loan){
 
       Withdrawal.query(withdrawalQuery, function(err, withdrawal){
 
+      var months = [ "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December" ];
+
         res.view({
           loan: loan,
-          withdrawal: withdrawal
+          withdrawal: withdrawal,
+          months: months
         });
       }); // Withdrawal.find
     }); // Loan.query
@@ -230,6 +231,10 @@ module.exports = {
 
     }); // trademore.getnewaddress
   }, // giveFunds
+
+  repay: function(req,res){
+    console.log('In loan/replay');
+  }, // repay
 
   destroy: function(req, res, next){
 

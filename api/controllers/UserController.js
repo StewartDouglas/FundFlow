@@ -74,14 +74,16 @@ module.exports = {
 
         Loan.find({borrower: req.param('id'), fullyFunded: 1}, function fullFunded(err, fullyfunded) {
 
-          //console.log(outstanding);
-          //console.log(fullyfunded);
+      var months = [ "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December" ];
+
 
           if(err) return next(err);
           res.view({
             user: user,
             outstanding: outstanding,
-            fullyfunded: fullyfunded
+            fullyfunded: fullyfunded,
+            months: months
           }); // res.view
 
         }); // Loan.find() fullyfunded
