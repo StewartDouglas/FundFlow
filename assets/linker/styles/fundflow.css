@@ -1,0 +1,15 @@
+#ex1Slider .slider-selection {
+	background: #BABABA;
+}
+
+input[type="range"]{
+   -webkit-background-color:#000; 
+   -webkit-width:80%; 
+   -webkit-margin:1em auto; 
+   -webkit-height:100px
+
+ }
+
+ input[type="range"]::-webkit-slider-thumb{
+   -webkit-border-radius:10px; 
+ }

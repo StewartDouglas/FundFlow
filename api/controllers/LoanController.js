@@ -69,11 +69,13 @@ module.exports = {
                    + 'loan.interest AS interest, '
                    + 'loan.beginning AS beginning, '
                    + 'loan.id AS id, '
-                   + 'loan.expires AS expires, '
-                   + 'loan.amountFunded AS amountFunded '
+                   + 'TIMESTAMPDIFF(day,NOW(),loan.expires) AS daydiff, '
+                   + '(TIMESTAMPDIFF(hour,NOW(),loan.expires) - (24*TIMESTAMPDIFF(day,NOW(),loan.expires))) AS hourdiff, '                   
+                   + '(loan.amountFunded/loan.amount)*100 AS amountFunded '
                    + 'FROM loan JOIN user ON user.id = loan.borrower '
                    + 'WHERE loan.fullyFunded=false '
-                   + 'AND user.id != ' + req.session.User.id;
+                   + 'AND user.id != ' + req.session.User.id + ' '
+                   + 'AND loan.expires >= CURDATE()';
 
     var withdrawalQuery = 'SELECT user.name AS borrower, '
                         + 'loan.id AS loanID, '
@@ -93,7 +95,11 @@ module.exports = {
 
     Loan.query(loanQuery, function foundLoan(err,loan){
 
+//      console.log("loan: " + JSON.stringify(loan));
+
       Withdrawal.query(withdrawalQuery, function(err, withdrawal){
+
+
 
       var months = [ "January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November", "December" ];
@@ -106,6 +112,39 @@ module.exports = {
       }); // Withdrawal.find
     }); // Loan.query
   }, // show
+
+  showOne: function(req, res, next) {
+
+    console.log('req.param(id): ' + req.param('id'));
+
+    var loanQuery = 'SELECT user.name AS borrower, '
+                   + 'user.email AS email, '
+                   + 'user.id AS user_id, '
+                   + 'loan.description AS description, '
+                   + 'loan.extendedDescription AS extendedDescription, '
+                   + 'loan.amount AS amount, '
+                   + 'loan.interest AS interest, '
+                   + 'loan.beginning AS beginning, '
+                   + 'loan.id AS id, '
+                   + '(NOW() - loan.expires) AS expires, '
+                   + '(loan.amountFunded/loan.amount) AS amountFunded '
+                   + 'FROM loan JOIN user ON user.id = loan.borrower '
+                   + 'WHERE loan.id = ' + req.param('id');
+
+    Loan.query(loanQuery, function foundLoan(err,loan){
+
+
+      var months = [ "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December" ];
+
+      console.log('loan: ' + JSON.stringify(loan));
+
+        res.view({
+          loan: loan,
+          months:months
+        });
+    }); // Loan.query
+  }, // showOne
 
   fund: function(req,res){
     Loan.findOne(req.param('id'), function foundLoan(err, loan){

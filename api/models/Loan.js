@@ -22,6 +22,11 @@ module.exports = {
   		required: true
   	},
 
+    extendedDescription: {
+      type: 'string',
+      size: 1000
+    },
+
   	amount: {
   		type: 'FLOAT',
   		required: true
