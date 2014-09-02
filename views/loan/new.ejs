@@ -8,22 +8,23 @@
   </script>
 
 	<!-- Need error handling logic -->
-	<div class="control-group">
-		I want to get a loan for 	
-					<input id="textInput" type="number" class="form-control" placeholder="amount" name="amount"> BTC	
-    	<input type="range" name="rangeInput" min="0" max="100" onchange="updateTextInput(this.value);"> 
+	<div class="control-group slider-div">
+		<div id="loan-text">
+			I want to get a loan for <input id="textInput" type="number" class="form-control amount-input slider-div" placeholder="10" name="amount"> BTC	
     	</div>
+    	<input type="range" name="rangeInput" min="0" max="100" default="10" onchange="updateTextInput(this.value);"> 
+    </div>
 
 	<div class="control-group">
-	<input type="number" class="form-control" placeholder="interest" name="interest">
+	<input type="number" class="form-control" placeholder="Annual Percentage Rate" name="interest">
 	</div>
 	
 	<div class="control-group">
-	<input type="text" class="form-control" placeholder="description" name="description">
+	<input type="text" class="form-control" placeholder="Description" name="description">
 	</div>
 
 	<div class="form-group">
-	<input type="text" class="form-control" placeholder="bitcoin address" name="address">
+	<input type="text" class="form-control" placeholder="Bitcoin address to receive funds" name="address">
 	<input type="button" class="btn" value="Generate"/>
 	</div>
 
