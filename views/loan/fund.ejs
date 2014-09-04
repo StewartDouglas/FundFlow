@@ -5,15 +5,22 @@
 			<tr>
 				<th>Description</th>
 				<th>Amount</th>
-				<th>Interest</th>
-				<th>Beginning</th>
+				<th>APR</th>
+				<th>Funding Expires</th>
+				<th>Payments Begin</th>
 				<th></th>
 			</tr>
 			<tr>
-			   <td><%= loan.description %></td>
-			   <td><%= loan.amount %></td>
-			   <td><%= loan.interest %></td>
-			   <td><%= loan.beginning %></td>
+			   <td><a href="/loan/showOne/<%= loan.id %>"><%= loan.description %></a></td>
+			   <td><%= loan.amount %> BTC</td>
+			   <td><%= loan.interest.toFixed(1) %> %</td>
+			   <td><%= loan.expires.getDate() %> <%= months[(loan.expires.getMonth())] %> <%= loan.expires.getFullYear() %> </td>
+			   <td><%= loan.expires.getDate() %> <%= months[(loan.expires.getMonth() + 1) % 12] %> <% if(loan.expires.getMonth() == 12) { %>
+			   	<%= loan.expires.getFullyYear() + 1 %> 
+			   	<% } %>
+			   	<% if(loan.expires.getMonth() != 12) { %>
+			   	<%= loan.expires.getFullYear() %>
+			   	<% } %>			   	
 			   <td>
 
 			      <form action="/loan/giveFunds/<%= loan.id %>" method="POST" id="giveFunds">

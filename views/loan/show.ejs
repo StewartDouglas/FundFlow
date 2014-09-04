@@ -3,12 +3,12 @@
 		<h1 style="padding: 0px; margin-top: 10px"> Funding Opportunities <small> These are loans you have funded </small> </h1>
 			<table class="table table-striped">
 				<tr>
-					<th>Borrower <a  class="help_box" rel="popover_left" data-original-title="." data-content="The percentage of the loan request amount funded with other lenders bids. Remember you can still bid on loan requests that are 100% full if you offer rate lower than current bids."><img id="helpBorrower" src="/images/help_grey.png" alt="?"></img></a></th>
-					<th>Description <a class="" rel="popover_left" data-original-title="." data-content="The percentage of the loan request amount funded with other lenders bids. Remember you can still bid on loan requests that are 100% full if you offer rate lower than current bids."><img id="helpDescription" src="/images/help_grey.png" alt="?"></img></a></th>
-					<th>Amount <a class="" rel="popover_left" data-original-title="." data-content="The percentage of the loan request amount funded with other lenders bids. Remember you can still bid on loan requests that are 100% full if you offer rate lower than current bids."><img id="helpAmount" src="/images/help_grey.png" alt="?"></img></a></th>
-					<th>APR <a class="" rel="popover_left" data-original-title="." data-content="The percentage of the loan request amount funded with other lenders bids. Remember you can still bid on loan requests that are 100% full if you offer rate lower than current bids."><img id="helpAPR" src="/images/help_grey.png" alt="?"></img></a></th>
-					<th>Time Left <a class="" rel="popover_left" data-original-title="." data-content="The percentage of the loan request amount funded with other lenders bids. Remember you can still bid on loan requests that are 100% full if you offer rate lower than current bids."><img id="helpTimeleft" src="/images/help_grey.png" alt="?"></img></a></th>
-					<th>% Funded <a class="" rel="popover_left" data-original-title="." data-content="The percentage of the loan request amount funded with other lenders bids. Remember you can still bid on loan requests that are 100% full if you offer rate lower than current bids."><img id="helpFunded" src="/images/help_grey.png" alt="?"></img></a></th>
+					<th>Borrower <a  class="help_box" rel="popover_left" data-original-title="." data-content="The name of the individual or company raising money."><img id="helpBorrower" src="/images/help_grey.png" alt="?"></img></a></th>
+					<th>Description <a class="" rel="popover_left" data-original-title="." data-content="A description of the use case for the loan."><img id="helpDescription" src="/images/help_grey.png" alt="?"></img></a></th>
+					<th>Amount <a class="" rel="popover_left" data-original-title="." data-content="The amount which the potential borrower wishes to raise."><img id="helpAmount" src="/images/help_grey.png" alt="?"></img></a></th>
+					<th>APR <a class="" rel="popover_left" data-original-title="." data-content="The Annual Percentage Rate. This is the amount of interest you will earn if you lend money for a year."><img id="helpAPR" src="/images/help_grey.png" alt="?"></img></a></th>
+					<th>Time Left <a class="" rel="popover_left" data-original-title="." data-content="The time remaining during which funding can be provided for this loan."><img id="helpTimeleft" src="/images/help_grey.png" alt="?"></img></a></th>
+					<th>% Funded <a class="" rel="popover_left" data-original-title="." data-content="The percentage of the loan request amount funded with other lenders bids."><img id="helpFunded" src="/images/help_grey.png" alt="?"></img></a></th>
 					<th></th>
 				</tr>
 				<% for(var i=0; i<loan.length; i++) {%>
@@ -29,23 +29,23 @@
 			<h1> Confirm Funds <small> These are loans you have funded, and placed a deposit </small></h1>
 				<table class="table table-striped">
 					<tr>
-						<th>Borrower</th>
-						<th>Description</th>
-						<th>Amount</th>
-						<th>Interest</th>
-						<th>Matures</th>
-						<th>Your Investment</th>
+						<th>Borrower <a  class="help_box" rel="popover_left" data-original-title="." data-content="The name of the individual or company raising money."><img id="helpBorrower2" src="/images/help_grey.png" alt="?"></img></a></th>
+						<th>Description <a class="" rel="popover_left" data-original-title="." data-content="A description of the use case for the loan."><img id="helpDescription2" src="/images/help_grey.png" alt="?"></img></a></th>
+						<th>Amount <a class="" rel="popover_left" data-original-title="." data-content="The amount which the potential borrower wishes to raise."><img id="helpAmount2" src="/images/help_grey.png" alt="?"></img></a></th>
+						<th>APR <a class="" rel="popover_left" data-original-title="." data-content="The Annual Percentage Rate. This is the amount of interest you will earn if you lend money for a year."><img id="helpAPR2" src="/images/help_grey.png" alt="?"></img></a></th>
+						<th>Matures  <a class="" rel="popover_left" data-original-title="." data-content="The time remaining during which funding can be provided for this loan."><img id="helpTimeleft2" src="/images/help_grey.png" alt="?"></img></a></th>
+						<th>Your Commitment  <a class="" rel="popover_left" data-original-title="." data-content="The percentage of the loan request amount funded with other lenders bids."><img id="helpInvestment" src="/images/help_grey.png" alt="?"></img></a></th>
 						<th></th>
 					</tr>
 					
 						<% for(var i=0; i<withdrawal.length; i++) {%>
 							<tr>
 								<td><a href="/user/show/<%= withdrawal[i].id %>"><%= withdrawal[i].borrower %></a></td>
-								<td><a href="/loan/showOne/<%= loan[i].id %>"><%= loan[i].description %></a><%= withdrawal[i].description %></td>
-								<td><%= withdrawal[i].amount %></td>
-								<td><%= withdrawal[i].interest %></td>
+								<td><a href="/loan/showOne/<%= loan[i].id %>"><%= withdrawal[i].description %></a></td>
+								<td><%= withdrawal[i].amount %> BTC</td>
+								<td><%= withdrawal[i].interest.toFixed(1) %> %</td>
 				   				<td><%= withdrawal[i].matures.getDate() %> <%= months[withdrawal[i].matures.getMonth()] %> <%= withdrawal[i].matures.getFullYear() %></td>
-								<td><%= withdrawal[i].commitment %></th>
+								<td><%= withdrawal[i].commitment %> BTC</th>
 								<td><a href="/withdrawal/confirm?id=<%= withdrawal[i].loanID %>&lender=<%= withdrawal[i].lender %>" class="btn btn-sm btn-primary">Confirm</a></td>
 							</tr>
 						<% } %>
@@ -55,11 +55,11 @@
 	</div>
 
 	<div id="dialogBorrower" class="dialog" title="Borrower">
-		<p> The percentage of the loan request amount funded with other lenders bids. Remember you can still bid on loan requests that are 100% full if you offer rate lower than current bids.</p>
+		<p> The name of the borrower applying for a loan.</p>
 	</div>
 
 	<div id="dialogDescription" class="dialog" title="Description">
-		<p> The percentage of the loan request amount funded with other lenders bids. Remember you can still bid on loan requests that are 100% full if you offer rate lower than current bids.</p>
+		<p> A description of what the borrower will use the loan for.</p>
 	</div>
 
 	<div id="dialogAmount" class="dialog" title="Amount">
@@ -77,5 +77,9 @@
 	<div id="dialogFunded" class="dialog" title="Funded">
 		<p> The percentage of the loan which has already been funded.</p>
 	</div>
+
+	<div id="dialogInvestment" class="dialog" title="Your Commitment">
+		<p> The amount of this loan you have commited.</p>
+	</div>	
 
 </div>

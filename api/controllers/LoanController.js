@@ -126,7 +126,8 @@ module.exports = {
                    + 'loan.interest AS interest, '
                    + 'loan.beginning AS beginning, '
                    + 'loan.id AS id, '
-                   + '(NOW() - loan.expires) AS expires, '
+                   + 'TIMESTAMPDIFF(day,NOW(),loan.expires) AS daydiff, '
+                   + '(TIMESTAMPDIFF(hour,NOW(),loan.expires) - (24*TIMESTAMPDIFF(day,NOW(),loan.expires))) AS hourdiff, '                   
                    + '(loan.amountFunded/loan.amount) AS amountFunded '
                    + 'FROM loan JOIN user ON user.id = loan.borrower '
                    + 'WHERE loan.id = ' + req.param('id');
@@ -148,8 +149,13 @@ module.exports = {
 
   fund: function(req,res){
     Loan.findOne(req.param('id'), function foundLoan(err, loan){
+
+      var months = [ "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December" ];
+
       res.view({
-        loan: loan
+        loan: loan,
+        months: months
       });
     });
   }, // fund

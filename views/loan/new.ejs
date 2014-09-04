@@ -12,7 +12,7 @@
 		<div id="loan-text">
 			I want to get a loan for <input id="textInput" type="number" class="form-control amount-input slider-div" placeholder="10" name="amount"> BTC	
     	</div>
-    	<input type="range" name="rangeInput" min="0" max="100" default="10" onchange="updateTextInput(this.value);"> 
+    	- <input type="range" name="rangeInput" min="0" max="100" default="10" onchange="updateTextInput(this.value);"> +
     </div>
 
 	<div class="control-group">
@@ -20,7 +20,11 @@
 	</div>
 	
 	<div class="control-group">
-	<input type="text" class="form-control" placeholder="Description" name="description">
+	<input type="text" class="form-control" placeholder="Overview" name="description">
+	</div>
+
+	<div class="control-group">
+	<input type="text" class="form-control" placeholder="Detailed description" name="extendedDescription">
 	</div>
 
 	<div class="form-group">

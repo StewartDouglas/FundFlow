@@ -51,46 +51,88 @@ $(function(){  // $(document).ready shorthand
     }
 });
 
-$("#helpBorrower").click(function () {
-  var target = $(this);
-  $( "#dialogBorrower" ).dialog( "option", "position", { my: "left top", at: "left bottom", of: target } )
-  $( "#dialogBorrower" ).dialog("open");
-});
+  $(".helpBorrower").click(function () {
+    var target = $(this);
+    $( "#dialogBorrower" ).dialog( "option", "position", { my: "left top", at: "left bottom", of: target } )
+    $( "#dialogBorrower" ).dialog("open");
+  });
 
-$("#helpDescription").click(function () {
-  var target = $(this);
-  $( "#dialogDescription" ).dialog( "option", "position", { my: "left top", at: "left bottom", of: target } )
-  $( "#dialogDescription" ).dialog("open");
-});
+  $("#helpDescription").click(function () {
+    var target = $(this);
+    $( "#dialogDescription" ).dialog( "option", "position", { my: "left top", at: "left bottom", of: target } )
+    $( "#dialogDescription" ).dialog("open");
+  });
 
-$("#helpAmount").click(function () {
-  var target = $(this);
-  $( "#dialogAmount" ).dialog( "option", "position", { my: "left top", at: "left bottom", of: target } )
-  $( "#dialogAmount" ).dialog("open");
-});
+  $("#helpAmount").click(function () {
+    var target = $(this);
+    $( "#dialogAmount" ).dialog( "option", "position", { my: "left top", at: "left bottom", of: target } )
+    $( "#dialogAmount" ).dialog("open");
+  });
 
-$("#helpAPR").click(function () {
-  var target = $(this);
-  $( "#dialogAPR" ).dialog( "option", "position", { my: "left top", at: "left bottom", of: target } )
-  $( "#dialogAPR" ).dialog("open");
-});
+  $("#helpAPR").click(function () {
+    var target = $(this);
+    $( "#dialogAPR" ).dialog( "option", "position", { my: "left top", at: "left bottom", of: target } )
+    $( "#dialogAPR" ).dialog("open");
+  });
 
-$("#helpTimeleft").click(function () {
-  var target = $(this);
-  $( "#dialogTimeleft" ).dialog( "option", "position", { my: "left top", at: "left bottom", of: target } )
-  $( "#dialogTimeleft" ).dialog("open");
-});
+  $("#helpTimeleft").click(function () {
+    var target = $(this);
+    $( "#dialogTimeleft" ).dialog( "option", "position", { my: "left top", at: "left bottom", of: target } )
+    $( "#dialogTimeleft" ).dialog("open");
+  });
 
-$("#helpFunded").click(function () {
-  var target = $(this);
-  $( "#dialogFunded" ).dialog( "option", "position", { my: "left top", at: "left bottom", of: target } )
-  $( "#dialogFunded" ).dialog("open");
-});
+  $("#helpFunded").click(function () {
+    var target = $(this);
+    $( "#dialogFunded" ).dialog( "option", "position", { my: "left top", at: "left bottom", of: target } )
+    $( "#dialogFunded" ).dialog("open");
+  });
 
-$('#ex1').slider({
-  formatter: function(value) {
-    return 'Current value: ' + value;
-  }
-});
+  $('#ex1').slider({
+    formatter: function(value) {
+      return 'Current value: ' + value;
+    }
+  });
+
+  $("#helpBorrower2").click(function () {
+    var target = $(this);
+    $( "#dialogBorrower" ).dialog( "option", "position", { my: "left top", at: "left bottom", of: target } )
+    $( "#dialogBorrower" ).dialog("open");
+  });
+
+  $("#helpDescription2").click(function () {
+    var target = $(this);
+    $( "#dialogDescription" ).dialog( "option", "position", { my: "left top", at: "left bottom", of: target } )
+    $( "#dialogDescription" ).dialog("open");
+  });
+
+  $("#helpAmount2").click(function () {
+    var target = $(this);
+    $( "#dialogAmount" ).dialog( "option", "position", { my: "left top", at: "left bottom", of: target } )
+    $( "#dialogAmount" ).dialog("open");
+  });
+
+  $("#helpAPR2").click(function () {
+    var target = $(this);
+    $( "#dialogAPR" ).dialog( "option", "position", { my: "left top", at: "left bottom", of: target } )
+    $( "#dialogAPR" ).dialog("open");
+  });
+
+  $("#helpTimeleft2").click(function () {
+    var target = $(this);
+    $( "#dialogTimeleft" ).dialog( "option", "position", { my: "left top", at: "left bottom", of: target } )
+    $( "#dialogTimeleft" ).dialog("open");
+  });
+
+  $("#helpFunded2").click(function () {
+    var target = $(this);
+    $( "#dialogFunded" ).dialog( "option", "position", { my: "left top", at: "left bottom", of: target } )
+    $( "#dialogFunded" ).dialog("open");
+  });
+
+  $("#helpInvestment").click(function () {
+    var target = $(this);
+    $( "#dialogInvestment" ).dialog( "option", "position", { my: "left top", at: "left bottom", of: target } )
+    $( "#dialogInvestment" ).dialog("open");
+  });
 
 });
