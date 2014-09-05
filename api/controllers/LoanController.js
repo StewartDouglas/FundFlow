@@ -14,6 +14,10 @@ module.exports = {
 
   create: function(req,res, next){
 
+    var duration = req.param('expires');
+    var date = new Date();
+    date.setUTCMonth(date.getUTCMonth() + duration);
+
     var loanObj = {
 
       borrower: req.session.User.id,
@@ -26,11 +30,11 @@ module.exports = {
       num_coupons: 12,
       beginning: new Date(),
       completion:new Date(),
-      expires: new Date(),
+      expires: date,
       amountFunded: 0,
       // **********************
 
-
+      extendedDescription: req.param('extendedDescription'),
       fullyFunded: false
     }
 
@@ -54,7 +58,7 @@ module.exports = {
   }, // create
 
   created: function(req,res){
-  	res.view();
+        res.view();
   }, // created
 
   show: function(req,res){
@@ -95,11 +99,7 @@ module.exports = {
 
     Loan.query(loanQuery, function foundLoan(err,loan){
 
-//      console.log("loan: " + JSON.stringify(loan));
-
       Withdrawal.query(withdrawalQuery, function(err, withdrawal){
-
-
 
       var months = [ "January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November", "December" ];

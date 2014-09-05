@@ -4,6 +4,18 @@
 			<small><%= user.email %> </small>
 		</h1>
 
+		<% if((typeof fullyfunded == 'undefined') && (typeof outstanding == 'undefined')){ %>
+
+			<h3> Welcome! </h3>
+
+			<hr>
+
+			<h4> You have not applied for funding, or supplied funding to others.</h4>
+
+			<h4> Why not use the 'Get Funding' or 'Give Funding' features above. </h4>
+
+		<% } %>	
+
 		<% if(typeof fullyfunded != 'undefined'){ %>		
 			<% if(fullyfunded.length>0){ %>
 				<hr>

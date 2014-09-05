@@ -40,6 +40,12 @@ $(document).ready(function(){
 				description: {
 					required: true
 				},
+				extendedDescription: {
+					required: true
+				},
+				expires: {
+					required: true
+				},
 				address: {
 					required: true,
 					minlength: 27,
