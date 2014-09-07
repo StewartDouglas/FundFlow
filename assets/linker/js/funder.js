@@ -135,4 +135,34 @@ $(function(){  // $(document).ready shorthand
     $( "#dialogInvestment" ).dialog("open");
   });
 
+  $("#generate").click(function(){
+       $.ajax({
+          url: 'http://localhost:18332', 
+          data: JSON.stringify({jsonrpc:'2.0',method:'getnewaddress',id:"0"}), 
+          type:"POST",
+          dataType:"jsonp",
+          username: "bitcoinrpc",
+          password: "rpcpw1234",
+          crossDomain : true,
+          xhrFields: {
+            withCredentials: true
+          },
+          success: function (result) { 
+                 alert("ok");
+          },
+          error: function (err,status,thrown) {
+                 alert ("this syntax sucks!! " + " ERROR: " + err + " STATUS: " + status + " " + thrown );
+                 for(i in err){
+                    console.log(err[i]);
+                 }
+          },
+          complete: function (xhr,status) { 
+                 alert('Complete=>  showing status as: '+ status); 
+                 data = $.parseJSON(xhr.responseText);  
+                 alert (data);
+          } 
+       });
+  });
+
+
 });

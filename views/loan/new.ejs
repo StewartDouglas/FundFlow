@@ -1,23 +1,81 @@
 <form action="/loan/create" method="POST" id="loan-form" class="form-signin">
 	<h2 class="form-signin-heading">Apply for a loan</h2>
 
-	<script type="text/javascript">
-    function updateTextInput(val) {
-      document.getElementById('textInput').value=val; 
-    }
-  </script>
 
 	<!-- Need error handling logic -->
 	<div class="control-group slider-div">
 		<div id="loan-text">
 			I want to get a loan for <input id="textInput" type="number" class="form-control amount-input slider-div" placeholder="10" name="amount"> BTC	
     	</div>
-    	- <input type="range" name="rangeInput" min="0" max="100" default="10" onchange="updateTextInput(this.value);"> +
+    	- <input type="range" name="rangeInput" min="1" max="100" default="10" oninput="updateTextInput(this.value);"> +
     </div>
 
+	<table class="table">
+		<thead>
+			<th class="col-md-4">Term</th>
+			<th class="col-md-4">APR</th>
+			<th class="col-md-4">Monthly Cost</th>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					<div class="radio">
+						<input type="radio" name="optionsTerm" value="option1" checked>
+						1 year
+					</div>
+				</td>
+				<td>
+					<span id="APR1">
+						1.0
+					</span>
+					%
+				</td>
+				<td>
+					£<span id="Monthly1">0.84</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div class="radio">
+						<input type="radio" name="optionsTerm" value="option2">
+						2 years
+					</div>
+				</td>
+				<td>
+					<span id="APR2">
+						2.0
+					</span>
+					%
+				</td>
+				<td>
+					£<span id="Monthly2">0.43</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div class="radio">
+						<input type="radio" name="optionsTerm" value="option3">
+						3 years
+					</div>
+				</td>
+				<td>
+					<span id="APR3">
+						3.0
+					</span>
+					%
+				</td>
+				<td>
+					£<span id="Monthly3">0.29</span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<!--
 	<div class="control-group">
 	<input type="number" class="form-control" placeholder="Annual Percentage Rate" name="interest">
 	</div>
+	-->
 	
 	<div class="control-group">
 	<input type="text" class="form-control" placeholder="Overview" name="description">
@@ -27,15 +85,19 @@
 	<input type="text" class="form-control" placeholder="Detailed description" name="extendedDescription">
 	</div>
 
+	<!--
 	<div class="control-group">
 	<input type="text" class="form-control" placeholder="Duration in months" name="expires">
 	</div>
+	-->
 
 	<div class="form-group">
-	<input type="text" class="form-control" placeholder="Bitcoin address to receive funds" name="address">
-	<input type="button" class="btn" value="Generate"/>
+	<input type="text" class="form-control" placeholder="Bitcoin address to receive funds" name="address" id="newAddress">
+	<input type="button" class="btn" id="generate" value="Generate" />
+	<!-- onclick="generateNewAddress()" -->
 	</div>
 
+	<input type="hidden" name="privKey" value="" />
 
 	<input type="submit" class="btn btn-lg btn-primary btn-block" value="Apply"/>
 	<input type="hidden" name="_csrf" value="<%= _csrf %>" />

@@ -17,7 +17,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .amount-input {
-	width: 60px;
+	width: 70px;
 	margin-bottom: 10px;
 }
 
@@ -34,4 +34,8 @@ input[type="range"]::-webkit-slider-thumb {
 #loan-text{
 	width: 85%;
 	margin: 0 auto;
+}
+
+.table tbody tr td {
+	vertical-align: middle;
 }

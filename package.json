@@ -14,7 +14,8 @@
     "bitcoin": "*",
     "form-data": "*",
     "winston": "*",
-    "request": "*"
+    "request": "*",
+    "bitcore": "*"
   },
   "scripts": {
     "start": "node app.js",
