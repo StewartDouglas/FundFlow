@@ -15,7 +15,8 @@
     "form-data": "*",
     "winston": "*",
     "request": "*",
-    "bitcore": "*"
+    "bitcore": "*",
+    "ripemd160": "*"
   },
   "scripts": {
     "start": "node app.js",

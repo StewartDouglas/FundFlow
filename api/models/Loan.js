@@ -37,7 +37,7 @@ module.exports = {
       required: true
     },
 
-    num_coupons: {
+    term: {
       type: 'INTEGER',
       required: true
     },
@@ -75,6 +75,10 @@ module.exports = {
       required: true,
       minLength: 27,
       maxLength: 34
+    },
+
+    monthlyPayment: {
+      type: 'FLOAT'
     },
 
     toJSON: function() {

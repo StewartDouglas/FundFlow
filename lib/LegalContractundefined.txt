@@ -1,0 +1,7 @@
+This is a contract between _BORROWER_ and the bearer, written on _DATE_. 
+
+The bearer has loaned _BORROWER_ a total amount of _PRINCIPAL_.
+
+_BORROWER_ promises to pay this principal back, along with interest of _INTEREST_, in _NUM_PAYMENTS_ equal instalments of _INSTALLMENT_AMOUNT_ beginning on undefined.
+
+Should _BORROWER_ fail to pay on time any of these instalments then _BORROWER_ and the bearer will enter mediation administered by the court, which will determine the correct course of action. 

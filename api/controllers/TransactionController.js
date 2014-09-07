@@ -1,9 +1,8 @@
 /**
  * TransactionController
  *
- * @module      :: Controller
+ * @module      :: TransactionController
  * @description	:: Actions for manipulting transactions
- * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 
 module.exports = {

@@ -1,6 +1,6 @@
 <div class='container'>
 	<div style="background-color: #eeeeee; border-radius: 20px; padding: 30px">
-		<h1 style="padding: 0px; margin-top: 10px"> Funding Opportunities <small> These are loans you have funded </small> </h1>
+		<h1 style="padding: 0px; margin-top: 10px"> Funding Opportunities <small> These are loans you can fund </small> </h1>
 			<table class="table table-striped">
 				<tr>
 					<th>Borrower <a  class="help_box" rel="popover_left" data-original-title="." data-content="The name of the individual or company raising money."><img id="helpBorrower" src="/images/help_grey.png" alt="?"></img></a></th>
@@ -41,7 +41,7 @@
 						<% for(var i=0; i<withdrawal.length; i++) {%>
 							<tr>
 								<td><a href="/user/show/<%= withdrawal[i].id %>"><%= withdrawal[i].borrower %></a></td>
-								<td><a href="/loan/showOne/<%= loan[i].id %>"><%= withdrawal[i].description %></a></td>
+								<td><a href="/loan/showOne/<%= withdrawal[i].id %>"><%= withdrawal[i].description %></a></td>
 								<td><%= withdrawal[i].amount %> BTC</td>
 								<td><%= withdrawal[i].interest.toFixed(1) %> %</td>
 				   				<td><%= withdrawal[i].matures.getDate() %> <%= months[withdrawal[i].matures.getMonth()] %> <%= withdrawal[i].matures.getFullYear() %></td>

@@ -39,3 +39,11 @@ input[type="range"]::-webkit-slider-thumb {
 .table tbody tr td {
 	vertical-align: middle;
 }
+
+#detailedDesc {
+	font-size: 16px;
+}
+
+#description {
+	height: 50px;
+}

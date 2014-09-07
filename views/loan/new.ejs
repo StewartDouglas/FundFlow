@@ -5,7 +5,7 @@
 	<!-- Need error handling logic -->
 	<div class="control-group slider-div">
 		<div id="loan-text">
-			I want to get a loan for <input id="textInput" type="number" class="form-control amount-input slider-div" placeholder="10" name="amount"> BTC	
+			I want to get a loan for <input id="textInput" type="number" class="form-control amount-input slider-div" placeholder="50" name="amount"> BTC	
     	</div>
     	- <input type="range" name="rangeInput" min="1" max="100" default="10" oninput="updateTextInput(this.value);"> +
     </div>
@@ -20,7 +20,7 @@
 			<tr>
 				<td>
 					<div class="radio">
-						<input type="radio" name="optionsTerm" value="option1" checked>
+						<input type="radio" id="1year" name="optionsTerm" value="option1" checked>
 						1 year
 					</div>
 				</td>
@@ -37,7 +37,7 @@
 			<tr>
 				<td>
 					<div class="radio">
-						<input type="radio" name="optionsTerm" value="option2">
+						<input type="radio" id="2year" name="optionsTerm" value="option2">
 						2 years
 					</div>
 				</td>
@@ -54,7 +54,7 @@
 			<tr>
 				<td>
 					<div class="radio">
-						<input type="radio" name="optionsTerm" value="option3">
+						<input type="radio" id="3year" name="optionsTerm" value="option3">
 						3 years
 					</div>
 				</td>
@@ -71,25 +71,21 @@
 		</tbody>
 	</table>
 
-	<!--
-	<div class="control-group">
-	<input type="number" class="form-control" placeholder="Annual Percentage Rate" name="interest">
-	</div>
-	-->
+
+	<input id="inputInterest" type="hidden" name="interest" value="1.0" />
+	<input id="inputExpires" type="hidden" name="expires" value="1"/>
+	<input id="detailedDescription" type="hidden" name="detailedDescription" value=""/>
 	
 	<div class="control-group">
-	<input type="text" class="form-control" placeholder="Overview" name="description">
+	<input id="description" type="text" class="form-control" placeholder="Why do you need this loan?" name="description">
 	</div>
 
 	<div class="control-group">
-	<input type="text" class="form-control" placeholder="Detailed description" name="extendedDescription">
+		<textarea class="form-control" id="detailedDesc" rows="4" placeholder="How will this loan be used?" onchange="updateDetailedDesc();"></textarea>
 	</div>
 
-	<!--
-	<div class="control-group">
-	<input type="text" class="form-control" placeholder="Duration in months" name="expires">
-	</div>
-	-->
+
+	<hr>
 
 	<div class="form-group">
 	<input type="text" class="form-control" placeholder="Bitcoin address to receive funds" name="address" id="newAddress">

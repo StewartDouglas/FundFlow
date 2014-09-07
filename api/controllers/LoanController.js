@@ -1,8 +1,8 @@
 /**
  * LoanController
  *
- * @module      :: Controller
- * @description	:: A set of functions called `actions`.
+ * @module      :: LoanController
+ * @description	:: Actions for manipulting loans
  */
 
 module.exports = {
@@ -16,7 +16,8 @@ module.exports = {
 
     var duration = req.param('expires');
     var date = new Date();
-    date.setUTCMonth(date.getUTCMonth() + duration);
+    // The loan must be funded within two weeks
+    date.setUTCDate(date.getUTCDate() + 14);
 
     var loanObj = {
 
@@ -25,16 +26,17 @@ module.exports = {
       amount: req.param('amount'),
       interest: req.param('interest'),
       sendaddress: req.param('address'),
+      term: req.param('expires'),
+      monthlyPayment: (req.param('amount') * (1 + (req.param('interest')/100)))/(req.param('expires')*12),
 
       // ** Current defaults **
-      num_coupons: 12,
       beginning: new Date(),
       completion:new Date(),
       expires: date,
       amountFunded: 0,
       // **********************
 
-      extendedDescription: req.param('extendedDescription'),
+      extendedDescription: req.param('detailedDescription'),
       fullyFunded: false
     }
 
@@ -174,7 +176,6 @@ module.exports = {
       console.log("Step 1. Client. Creates Address: " + clientAddress);
       sails.log.debug("Step 1. Client. Creates Address: " + clientAddress);
 
-
       createForm.append('clientAddress', clientAddress);
       createForm.append('loanId', req.param('id'));
       createForm.append('fund', req.param('fund'));
@@ -201,10 +202,6 @@ module.exports = {
           trademore.send(resultObject.ms,0.00001,function(txid){
 
             console.log('Step 5. Client. Generate transaction with txid: ' + txid)
-
-            //request.get('http://localhost:1337/csrfToken', function(error, getResponse, getBody){
-              // CRSF currently turned off. See config/csrf.js
-              //console.log('JSON.parse(getBody) :' + JSON.parse(getBody)._csrf);
 
               confirmForm.append('txid', txid);
               confirmForm.append('fund', req.param('fund'));
@@ -238,7 +235,53 @@ module.exports = {
                               if(err) { console.log('Error trying to update loan'); }
                               else { console.log('Loan status updated to fully funded'); }
                             }); // Loan.update
-                          
+
+                            var replace = require('../../lib/textReplace').replace;
+
+                            var q = 'SELECT user.name AS borrower, '
+                                  + 'transaction.amount AS principal, '
+                                  + 'loan.interest AS interest, '
+                                  + 'loan.term*12 AS numPayments, '
+                                  + '(transaction.amount*(1+(loan.interest/100)))/(loan.term*12) AS monthlyPayment, '
+                                  + 'loan.expires AS beginning '
+                                  + 'FROM transaction '
+                                  + 'JOIN loan ON loan.id = transaction.loan ' 
+                                  + 'JOIN user ON user.id = loan.borrower '
+                                  + 'WHERE loan.id = ' + updateLoan.id;
+
+                            User.query(q, function(err, deposits){
+
+                              console.log("deposits: " + JSON.stringify(deposits));
+                              console.log("deposits[0].borrower: " + deposits[0].borrower);
+
+                              // Create the contract
+                              for(i in deposits){
+
+                                replace(deposits[i].borrower, 
+                                        deposits[i].principal, 
+                                        deposits[i].interest, 
+                                        deposits[i].numPayments, 
+                                        deposits[i].monthlyPayment, 
+                                        deposits[i].beginning,
+                                        updateLoan.id);
+                              };
+
+                              //for(i in deposits){
+
+                              //}
+
+                            });
+
+
+                          // GENERATE COUNTERPARTY TOKEN
+                          /*
+                            1) Create contract
+                            2) Hash contract
+                            3) Counterparty Issuance
+                            4) Counterparty Send
+                            send --source=[source] --asset=[asset] --quantity=[quantity] --destination=[destination]
+                          */
+
                           // ** loan has been fully funded. release the funds **
                           var releaseForm = new FormData();
                           releaseForm.append('loanId', updateLoan.id);

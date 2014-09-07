@@ -48,3 +48,4 @@ config/local.js
 # test code
 ########################
 testCode/
+lib/contracts/

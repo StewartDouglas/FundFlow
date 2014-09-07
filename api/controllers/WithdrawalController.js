@@ -1,8 +1,8 @@
 /**
  * WithdrawalController
  *
- * @module      :: Controller
- * @description	:: A set of functions called `actions`.
+ * @module      :: WithdrawalController
+ * @description	:: Actions for manipulting withdrawals
  */
 
 module.exports = {
