@@ -12,7 +12,7 @@ payload = {
              "asset": "DASDDV",
              "quantity": 100000,
              "divisible": False,   
-             "description": "JJJ", 
+             "description": sys.argv[1], 
              "callable_": False,     
              "call_date": None,   
              "call_price": None,                                                                    

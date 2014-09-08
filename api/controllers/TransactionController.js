@@ -68,7 +68,6 @@ module.exports = {
           4) Counterparty Send
           send --source=[source] --asset=[asset] --quantity=[quantity] --destination=[destination]
         */
-        // AND PLACE IN MULTISIG
 
         Transaction.update({id: req.body.transID}, {txid: req.body.txid} , function(err, conf){
 
