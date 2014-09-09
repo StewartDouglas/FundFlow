@@ -76,7 +76,7 @@ module.exports = {
                    + 'loan.beginning AS beginning, '
                    + 'loan.id AS id, '
                    + 'TIMESTAMPDIFF(day,NOW(),loan.expires) AS daydiff, '
-                   + '(TIMESTAMPDIFF(hour,NOW(),loan.expires) - (24*TIMESTAMPDIFF(day,NOW(),loan.expires))) AS hourdiff, '                   
+                   + 'TIMESTAMPDIFF(hour,NOW(),loan.expires) MOD 24 AS hourdiff, '                   
                    + '(loan.amountFunded/loan.amount)*100 AS amountFunded '
                    + 'FROM loan JOIN user ON user.id = loan.borrower '
                    + 'WHERE loan.fullyFunded=false '
@@ -116,8 +116,6 @@ module.exports = {
   }, // show
 
   showOne: function(req, res, next) {
-
-    console.log('req.param(id): ' + req.param('id'));
 
     var loanQuery = 'SELECT user.name AS borrower, '
                    + 'user.email AS email, '
@@ -208,7 +206,7 @@ module.exports = {
               confirmForm.append('transID', resultObject.id);
               confirmForm.submit('http://localhost:1337/transaction/confirm', function(err,resp){
 
-                 console.log('Step 8. Client. Receive confirmation message: ' + resp); 
+                 console.log('Step 8. Client. Transaction confirmed.'); 
 
                  // CAN BE CUT-PASTE OUT
                   // Use adapter here instead? e.g. .update()
@@ -230,10 +228,8 @@ module.exports = {
                       else // we found a loan
                       {
                         if(updateLoan.amountFunded >= updateLoan.amount){
-                            console.log('Loan ' + updateLoan.id + ' has been fully funded.');
                             Loan.update({id: updateLoan.id},{fullyFunded : 1},function(err,fundedLoan){
                               if(err) { console.log('Error trying to update loan'); }
-                              else { console.log('Loan status updated to fully funded'); }
                             }); // Loan.update
 
                             var replace = require('../../lib/textReplace').replace;
@@ -251,9 +247,6 @@ module.exports = {
 
                             User.query(q, function(err, deposits){
 
-                              console.log("deposits: " + JSON.stringify(deposits));
-                              console.log("deposits[0].borrower: " + deposits[0].borrower);
-
                               // Create the contract
                               for(i in deposits){
 
@@ -266,9 +259,6 @@ module.exports = {
                                         updateLoan.id);
                               };
 
-                              //for(i in deposits){
-
-                              //}
 
                             });
 

@@ -47,14 +47,14 @@ module.exports = {
     //check validity of transaction
     trademore.confirm(req.body.txid, function(transaction, validity){
 
-      console.log('Step 7. Server. Server parses the transaction: ');
-      console.log(transaction);
-      console.log('And now the vin scriptSig');
-      console.log(JSON.stringify(transaction.vin[0].scriptSig));
-      console.log('And now the 1st vout scriptSig');
-      console.log(JSON.stringify(transaction.vout[0].scriptPubKey));
-      console.log('And now the 2nd vout scriptSig');
-      console.log(JSON.stringify(transaction.vout[1].scriptPubKey));
+      console.log('Step 7. Server. Server parses the transaction, to confirm validity. ');
+      //console.log(transaction);
+      //console.log('And now the vin scriptSig');
+      //console.log(JSON.stringify(transaction.vin[0].scriptSig));
+      //console.log('And now the 1st vout scriptSig');
+      //console.log(JSON.stringify(transaction.vout[0].scriptPubKey));
+      //console.log('And now the 2nd vout scriptSig');
+      //console.log(JSON.stringify(transaction.vout[1].scriptPubKey));
 
       if(validity==true)
       {
@@ -72,7 +72,6 @@ module.exports = {
         Transaction.update({id: req.body.transID}, {txid: req.body.txid} , function(err, conf){
 
           if(err) { console.log('Error trying to update Transaction: ' + err) }
-          else { console.log('Transaction updated') }
 
 
         })
@@ -92,7 +91,7 @@ module.exports = {
     var FormData = require('form-data');
     var trademore = require('../../lib/trademore');
 
-    console.log('Step 9. Server. Releasing funds for loan: ' + req.body.loanId);
+    console.log('Step 9. Server. Releasing funds for loan with id ' + req.body.loanId);
 
     // get deposits associated with loanId
     Transaction.find({loan: req.body.loanId}, function(err, deposits){
@@ -106,11 +105,11 @@ module.exports = {
         // create the transaction: deposit --> borrower
         // createrawtransaction(source,destination,amount,callback)
         trademore.createrawtransaction(deposits[i].txid, req.body.sendaddress, 0.00001, function(rawtransaction){
-          console.log('Step 9.1 Server. Creating transaction: ' + 0.00001 + ' BTC --> ' + req.body.sendaddress + ' ' + rawtransaction);
+          console.log('Step 9.1 Server. Creating transaction: ' + 0.00001 + ' BTC --> ' + req.body.sendaddress);
 
             // sign the transaction
             trademore.signrawtransaction(rawtransaction, function(signedtransaction){
-              console.log('Step 9.2 Server. Signing transaction: ' + signedtransaction);
+              console.log('Step 9.2 Server. Signing transaction. ');
               // save the output in MySQL, so lender can sign and broadcast              
               var withdrawForm = new FormData();
               withdrawForm.append('signedtransaction', signedtransaction);

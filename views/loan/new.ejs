@@ -7,8 +7,12 @@
 		<div id="loan-text">
 			I want to get a loan for <input id="textInput" type="number" class="form-control amount-input slider-div" placeholder="50" name="amount"> BTC	
     	</div>
-    	- <input type="range" name="rangeInput" min="1" max="100" default="10" oninput="updateTextInput(this.value);"> +
+    	<div id = "slider">
+    	  - <input  type="range" name="rangeInput" min="1" max="100" default="10" oninput="updateTextInput(this.value);" + >
+    	</div> 
     </div>
+
+    <hr>
 
 	<table class="table">
 		<thead>
@@ -31,8 +35,9 @@
 					%
 				</td>
 				<td>
-					£<span id="Monthly1">0.84</span>
+					<span id="Monthly1">0.84</span> BTC
 				</td>
+				
 			</tr>
 			<tr>
 				<td>
@@ -48,8 +53,9 @@
 					%
 				</td>
 				<td>
-					£<span id="Monthly2">0.43</span>
+					<span id="Monthly2">0.43</span> BTC
 				</td>
+				
 			</tr>
 			<tr>
 				<td>
@@ -65,7 +71,8 @@
 					%
 				</td>
 				<td>
-					£<span id="Monthly3">0.29</span>
+					<span id="Monthly3">0.29</span> BTC
+					
 				</td>
 			</tr>
 		</tbody>
@@ -87,11 +94,11 @@
 
 	<hr>
 
-	<div class="form-group">
-	<input type="text" class="form-control" placeholder="Bitcoin address to receive funds" name="address" id="newAddress">
-	<input type="button" class="btn" id="generate" value="Generate" />
-	<!-- onclick="generateNewAddress()" -->
-	</div>
+	
+		<div class="form-group">
+		<input type="text" class="form-control" placeholder="Bitcoin address to receive funds" name="address" id="newAddress">
+		</div>
+
 
 	<input type="hidden" name="privKey" value="" />
 

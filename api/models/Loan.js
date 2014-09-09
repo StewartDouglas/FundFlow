@@ -54,7 +54,7 @@ module.exports = {
 
     // The date by which the loan must be funded
     expires: {
-      type: 'DATE',
+      type: 'DATETIME',
       required: true
     },
 

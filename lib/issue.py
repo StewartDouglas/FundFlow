@@ -8,8 +8,8 @@ auth = HTTPBasicAuth('rpc', 'foo')
  
 payload = {
   "method": "create_issuance",
-  "params": {"source": "miEqHpNNQWejM4aL8MUApUcDRh51PzDaed",
-             "asset": "DASDDV",
+  "params": {"source": sys.argv[2],
+             "asset": sys.argv[3],
              "quantity": 100000,
              "divisible": False,   
              "description": sys.argv[1], 

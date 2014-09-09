@@ -58,7 +58,7 @@ module.exports = {
         // redirect to the show action
         // From ep1-6: //res.json(user); 
 
-        res.redirect('/user/show/' + user.id);
+        res.redirect('/user/show?id=' + user.id + '&new=true');
       });
     });
   },
@@ -77,14 +77,30 @@ module.exports = {
       var months = [ "January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November", "December" ];
 
-
           if(err) return next(err);
-          res.view({
+
+          if(typeof req.param('new') != undefined){
+
+            var newUser = req.param('new');
+
+            res.view({
+              user: user,
+              outstanding: outstanding,
+              fullyfunded: fullyfunded,
+              months: months,
+              newUser: newUser
+            }); // res.view
+
+          } else{
+            res.view({
             user: user,
             outstanding: outstanding,
             fullyfunded: fullyfunded,
             months: months
           }); // res.view
+          }
+
+
 
         }); // Loan.find() fullyfunded
       }); // Loan.find() outstanding 

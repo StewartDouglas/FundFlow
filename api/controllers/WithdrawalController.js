@@ -44,7 +44,7 @@ module.exports = {
 
 
         trademore.signrawtransaction(withdrawal[i].unsignedtx, function(signedtransaction){ 
-          console.log('Client. 10.1. Signining transaction: ' + signedtransaction);
+          console.log('Step 10.1. Client. Signining transaction.');
           
           // update the Withdrawal table
           Withdrawal.update( {id: withdrawal[i].id}, {outstanding: 0}, function(){
@@ -53,11 +53,10 @@ module.exports = {
           // now, broadcast the transaction
           trademore.sendrawtransaction(signedtransaction, function(confirmation){
 
-            console.log('Step 10.2. Client. Transaction broadcast: ' + confirmation);
-
             trademore.confirm(confirmation, function(transaction, validity){
 
-              console.log('Client. 10.3 Broadcast transaction: ' + JSON.stringify(transaction));
+              console.log('Step 10.2 Client. Transaction broadcast: ' );
+              console.log(JSON.stringify(transaction));
           });
 
 
