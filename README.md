@@ -1,9 +1,9 @@
 ### FundFlow: A Bitcoin Lending Platform
 
-In order to run the Sails.js web application a number of dependencies must first be installed. All of these are readily available but since some their binaries are quite large, it does not make sense to provide them with the project's source code. These dependencies are:
+In order to run this Sails.js web application a number of dependencies must first be installed. All of these are readily available but since some their binaries are quite large, it does not make sense to provide them with the project's source code. These dependencies are:
 
 
-1. Bitcoind
+####1. Bitcoind
 
 We can obtain the bitcoind source code from the Bitcoin core developers GitHub account:
 
@@ -35,7 +35,7 @@ For Mac OSX:
 Bitcoind must be running for this projects web application to behave correctly.
 
 
-2. Counterpartyd
+####2. Counterpartyd
 
 Bitcoind should be installed prior to Counterpartyd. Counterpartyd, the Counterparty daemon, can be found on the the Counterparty GitHub page. To get the source code, run:
 
@@ -61,7 +61,7 @@ For Mac OSX:
 
 Counterpartyd must be running for this projects web application to behave correctly. Also note that counterpartyd needs to parse the entire bitcoin blockchain which can take quite sometime (in our experience on the order of days when it is first run). \\
 
-3. Mysqld
+####3. Mysqld
 
 MySQL is an opensource relational database management system and is easily downloaded from www.dev.mysql.com/downloads/mysql/. After downloading the MySQL daemon, mysqld can be launched (on Mac OSX) as follows: 
 
@@ -71,11 +71,11 @@ MySQL is an opensource relational database management system and is easily downl
 Mysqld must be running for this projects web application to behave correctly.
 
 
-4. Node.js
+####4. Node.js
 
 Node.js is a platform built on Chrome's JavaScript runtime. It is free to download from www.nodejs.org. Once downloaded it can be used on the command line using the command node. Node's package manager, npm, comes bundled with the install.
 
-5. Sails
+####5. Sails
 
 After node.js has be installed, it is trivial to install Sails.js. Only one command is required:
 
