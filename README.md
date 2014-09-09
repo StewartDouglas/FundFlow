@@ -1,3 +1,5 @@
+### FundFlow: A Bitcoin Lending Platform
+
 In order to run the Sails.js web application a number of dependencies must first be installed. All of these are readily available but since some their binaries are quite large, it does not make sense to provide them with the project's source code. These dependencies are:
 
 
