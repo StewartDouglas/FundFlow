@@ -42,7 +42,6 @@ module.exports = {
 
   	Loan.create(loanObj, function loanCreated(err,loan){
   		
-      // If there's an error
       if (err) {
         console.log(err);
         req.session.flash = {
@@ -52,7 +51,7 @@ module.exports = {
         // If error redirect back to sign-up page
         return res.redirect('/loan/new');
 
-		}
+      }
 
 		res.redirect('/loan/created');
 

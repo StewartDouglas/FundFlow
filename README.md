@@ -20,7 +20,7 @@ To launch the client we then run:
 
 	./bitcoind -testnet
 
-For safety we may want to set testnet as default. To do this we include \begin{lstlisting}
+For safety we may want to set testnet as default. To do this we include the following flag in the relevant config file:
 
 	testnet=1
 
